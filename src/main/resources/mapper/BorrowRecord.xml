@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cqut.bookmangement.mapper.BorrowRecordMapper">
+
+    <insert id="insertRecord" parameterType="cn.cqut.bookmangement.entity.BorrowRecord">
+        INSERT INTO BORROWRECORDS
+        VALUES (#{borrowId}, #{userId}, #{bookId}, #{shouldTime}, #{returnTime});
+    </insert>
+
+    <select id="countBySearch" parameterType="string" resultType="int">
+        SELECT
+        count(*)
+        FROM
+        borrowrecords
+        INNER JOIN bookinfo ON borrowrecords.book_id = bookinfo.book_id
+        <if test="content != null">
+            where CONCAT(borrowrecords.borrow_id,
+            borrowrecords.user_id,
+            borrowrecords.book_id,
+            bookinfo.book_name)
+            like '%${content}%'
+        </if>
+    </select>
+
+    <select id="selectBySearch" resultType="map">
+        SELECT
+        borrowrecords.borrow_id,
+        borrowrecords.user_id,
+        borrowrecords.should_time,
+        borrowrecords.return_time,
+        borrowrecords.book_id,
+        bookinfo.book_id,
+        bookinfo.book_name,
+        bookinfo.author,
+        bookinfo.translator,
+        bookinfo.price,
+        bookinfo.isbn_code,
+        bookinfo.come_up_time,
+        bookinfo.publish_company,
+        bookinfo.state,
+        bookinfo.entering_men,
+        bookinfo.entering_date
+        FROM
+        borrowrecords
+        INNER JOIN bookinfo ON borrowrecords.book_id = bookinfo.book_id
+        <if test="content != null">
+            where CONCAT( borrowrecords.borrow_id,
+            borrowrecords.user_id,
+            borrowrecords.book_id,
+            bookinfo.book_name
+            )
+            like '%${content}%'
+        </if>
+        LIMIT ${example.start},${example.pageSize};
+    </select>
+    <select id="selectOneRecByUserAndBookId" resultType="cn.cqut.bookmangement.entity.BorrowRecord">
+        SELECT borrowrecords.borrow_id,
+               borrowrecords.user_id,
+               borrowrecords.book_id,
+               borrowrecords.should_time,
+               borrowrecords.return_time
+        FROM borrowrecords
+        WHERE borrowrecords.user_id = #{userId}
+          and borrowrecords.book_id = #{bookId}
+        ORDER BY borrow_id
+        LIMIT 1
+    </select>
+    <update id="update">
+        UPDATE
+        borrowrecords
+        SET
+            user_id = #{userId},
+            book_id = #{bookId},
+            should_time = #{shouldTime},
+            return_time = #{returnTime} where borrow_id=#{borrowId};
+    </update>
+    <select id="selectRecByUserOnRec" parameterType="string" resultType="map">
+        SELECT borrowrecords.borrow_id,
+               borrowrecords.user_id,
+               borrowrecords.should_time,
+               bookinfo.book_name
+        FROM borrowrecords INNER JOIN bookinfo
+        ON borrowrecords.book_id = bookinfo.book_id
+        WHERE state = 0
+            and user_id = #{userId}
+    </select>
+    <select id="selectUnRecByUserOnRec" parameterType="string" resultType="map">
+        SELECT borrowrecords.borrow_id,
+               borrowrecords.user_id,
+               borrowrecords.should_time,
+               borrowrecords.return_time,
+               bookinfo.book_name
+        FROM borrowrecords INNER JOIN bookinfo
+        ON borrowrecords.book_id = bookinfo.book_id
+        WHERE state = 1
+            and user_id = #{userId}
+        ORDER BY borrow_id DESC;
+    </select>
+</mapper>

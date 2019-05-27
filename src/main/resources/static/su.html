@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="/script/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/script/jquery.form.js"></script>
+
+    <title>Title</title>
+
+</head>
+<body>
+<form id="form" action="/bookAdmin/center" method="post">
+    <input class="inputBtn" style="width:100px;height:34px;margin:0px 0px 20px 150px;font-size:16px"
+           type="button" value="修改资料"/>
+    <div class="data"><label>原密码</label><input type="password" name="adpassword"/></div>
+    <div class="data"><label>新密码</label><input type="password" name="adnPassword"/></div>
+    <div class="data"><label>确认新密码</label><input type="password" name="adcpassword"/></div>
+    <div class="data"><label>电话</label><input value="18823456543" name="adphone"/></div>
+    <div class="data"><label>邮箱</label><input type="email" value="18823456@qq.com" name="ademail"/>
+    </div>
+    <!--    <input type="submit" content="add_btn">-->
+    <button class="add_btn">提交修改</button>
+    <div class="noadd_btn">取消</div>
+</form>
+</body>
+<script>
+    $('.add_btn').click(function () {
+        console.log($('#form').serialize());
+        console.log(($('#form').serialize()));
+
+        $.each(formArray, function (i, item) {
+            var itemName = "\""+item.name+"\"";
+            formObject[itemName] = item.value;
+        });
+        console.log(formObject);
+
+        $.ajax({
+            type: 'POST',
+            data: formObject,
+            contentType: "application/json",
+            url: "/bookAdmin/center",
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                alert(JSON.stringify(data));
+            },
+            error: function (data) {
+                alert(JSON.stringify(data) + "--上传失败,请刷新后重试");
+            }
+
+        })
+    })
+    // $('.add_btn').click(function () {
+    //     console.log("click");
+    //
+    //     var opt = {
+    //         url: "/bookAdmin/center",
+    //         type: 'post',
+    //         dataType: 'json',
+    //
+    //         headers: {
+    //             "ClientCallMode": "ajax",
+    //             "Content-Type":"application/json"
+    //         }, //添加请求头部
+    //         success: function (data) {
+    //             alert(JSON.stringify(data));
+    //         },
+    //         error: function (data) {
+    //             alert(JSON.stringify(data) + "--上传失败,请刷新后重试");
+    //         }
+    //     };
+    //     // console.log($('#form'));
+    //     $('#form').ajaxSubmit(opt);
+    //     // $('#form').submit();
+    //     return false;
+    // })
+
+</script>
+
+</html>

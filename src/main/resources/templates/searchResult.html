@@ -1,0 +1,129 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>搜索结果</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../static/style/searchResult.css" th:href="@{/style/searchResult.css}">
+    <link rel="stylesheet" type="text/css" href="../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <script type="text/javascript" src="../static/script/jquery-2.1.4.min.js"
+            th:href="@{/script/jquery-2.1.4.min.js}"></script>
+
+    <!-- 引入组件库 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".login").click(function () {
+                window.open("./login.html");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="search_page">
+    <div class="header">
+        <div class="home"><a href="../html/index.html" th:href="@{/index.html}"><i class="fa fa-home"></i>首页</a></div>
+        <div class="login" href="/login.html">登录</div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <el-form id="app">
+            <el-form-item>
+                <el-col :span="12">
+                    <el-input type="text" name="content" v-model="content"
+                              placeholder="输入搜索信息" width="60%"/>
+                </el-col>
+                <el-button class="btn" id="search-btn" @click="send" type="primary">搜索</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-table stripe
+                          :data="tableData"
+                          style="width: 100%">
+                    <el-table-column
+                            prop="book_name"
+                            label="图书名"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="author"
+                            label="作者"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="publish_company"
+                            label="出版社"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="num"
+                            label="数量"
+                            width="180">
+                    </el-table-column>
+                </el-table>
+            </el-form-item>
+            <el-form-item :center="true">
+                <el-col :span="4">
+                    <el-button id="pre_btn" type="button" @click="dec(-1)">上一页</el-button>
+                </el-col>
+                <el-col :span="10">
+                    <el-input type="number" id="curPage" name="currentPage" value="1"
+                              v-model="currentPage"/>
+                </el-col>
+                <el-col :span="4">
+                    <el-button id="next_btn" type="button" @click="inc(1)">下一页</el-button>
+                </el-col>
+            </el-form-item>
+        </el-form>
+    </div>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            content: '',
+            currentPage: 1,
+            tableData: []
+        },
+        methods: {
+            inc: function () {
+                this.currentPage += 1;
+                this.send();
+            },
+            dec: function () {
+                this.currentPage -= 1;
+                this.send();
+            },
+            send: function () {
+                var _this = this;
+                axios.post("/searchResult",
+                    {
+                        content: _this.content,
+                        currentPage: _this.currentPage
+                    }).then(function (value) {
+                    var s_data = value.data.data;
+                    if (!_this.parseInfo(value)) return;
+                    _this.tableData = s_data.data;
+                    _this.currentPage = s_data.currentPage;
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            },
+            parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0) {
+                    this.$message("搜索成功");
+                    return true;
+                }
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+    })
+</script>
+</html>

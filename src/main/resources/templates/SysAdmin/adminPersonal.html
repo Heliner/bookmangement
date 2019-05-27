@@ -1,0 +1,127 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>系统管理员-管理员中心</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/adminMain.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style/adminReader.css}">
+    <script type="text/javascript" th:src="@{/script/jquery-2.1.4.min.js}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".left ul li:eq(8)").css("color", "#FFF");
+            $(".left ul li:eq(8)").css("background-color", "#B78DE7");
+            $(".left ul").find('li:eq(8)').children(".trig").css('display', 'block');
+            $(".data input").attr('disabled', 'true');
+            $(".inputBtn").click(function () {
+                $(".data input").removeAttr('disabled');
+            });
+            $(".noadd_btn").click(function () {
+                $(".data input").attr('disabled', 'true');
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="ad_page">
+    <div class="header">
+        <img th:src="@{/images/logo.png}">
+        <div class="state">
+            <div class="ad_name">
+                <div class="fa_i"><i class="fa fa-user"></i></div>
+                <a th:href="@{/sysAdmin/adminPersonal.html}">管理员01</a></div>
+            <div class="out"><a href="/loginOut">退出</a></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <ul>
+                <a th:href="@{/sysAdmin/adminAddReader.html}">
+                    <li>录入新读者
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminOutReader.html}">
+                    <li>删除读者
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAlterReader.html}">
+                    <li>修改读者信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAddAd.html}">
+                    <li>录入图书管理员
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminOutAd.html}">
+                    <li>删除图书管理员
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAlterAd.html}">
+                    <li>修改管理员信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminSearchReader.html}">
+                    <li>查看读者信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminSearchAd.html}">
+                    <li>查看管理员信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminPersonal.html}">
+                    <li>管理员中心
+                        <div class="trig"></div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- class="ad_data"的div中是系统管理员系统的切换部分 -->
+            <div class="ad_data">
+                <form id="form" action="/bookAdmin/center" method="post">
+                    <input class="inputBtn" style="width:100px;height:34px;margin:0px 0px 20px 150px;font-size:16px"
+                           type="button" value="修改资料"/>
+                    <div class="data"><label>原密码</label><input type="password" name="adpassword"/></div>
+                    <div class="data"><label>新密码</label><input type="password" name="adnPassword"/></div>
+                    <div class="data"><label>确认新密码</label><input type="password" name="adcpassword"/></div>
+                    <div class="data"><label>电话</label><input value="18823456543" name="adphone"/></div>
+                    <div class="data"><label>邮箱</label><input type="email" value="18823456@qq.com" name="ademail"/>
+                    </div>
+                    <button class="add_btn" id="add_btn">提交修改</button>
+                    <div class="noadd_btn">取消</div>
+                </form>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+<script>
+    $('#add_btn').click(function () {
+        console.log($("#form").serialize());
+        $.ajax({
+            type: 'post',
+            data: $('#form').serialize(),
+            url: "/bookAdmin/updateSysAdmin",
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                alert("修改成功");
+            },
+            error: function (data) {
+                alert("生成失败，原因：" + data.data.message);
+            }
+        });
+    })
+
+</script>
+</html>

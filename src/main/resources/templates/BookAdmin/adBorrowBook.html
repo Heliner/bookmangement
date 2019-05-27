@@ -1,0 +1,206 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理员-读者借书</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adMain.css" th:href="@{/style/adMain.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adBook.css" th:href="@{/style/adBook.css}">
+    <script type="text/javascript" src="../../static/script/jquery-2.1.4.min.js"
+            th:href="@{/script/jquery-2.1.4.min.js}"></script>
+    <script type="text/javascript" src="../../static/layer-v2.0/layer/layer.js"
+            th:href="@{/layer-v2.0/layer/layer.js}"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/style/adBorrowBook.css"
+          th:href="@{/style/adBorrowBook.css}">
+
+    <!-- 引入组件库 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".left ul li:eq(0)").css("color", "#FFF");
+            $(".left ul li:eq(0)").css("background-color", "#BBCAF1");
+            $(".left ul").find('li:eq(0)').children(".trig").css('display', 'block');
+            $(".A_btn").click(function () {
+                var index = layer.load(1, {
+                    shade: [0.1, '#fff'] //0.1透明度的白色背景
+                    // layer.close(index);   //关闭验证
+                });
+            });
+            $(".B_btn").click(function () {
+                $(".data input").val("");
+            });
+            $('input[type=text]:first').focus();//默认光标位置在input
+            $(".table tbody tr:odd").css("backgroundColor", "#FCF8E3");//表格奇数行背景
+        });
+    </script>
+</head>
+<body>
+<div class="ad_page">
+    <div class="header">
+        <img src="../images/logo.png">
+        <div class="state">
+            <div class="ad_name">
+                <div class="fa_i"><i class="fa fa-user"></i></div>
+                <a href="/bookAdmin/adPersonal.html">管理员01</a></div>
+            <div class="out"><a href="../html/index.html">退出</a></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <ul>
+                <a href="/bookAdmin/adBorrowBook.html">
+                    <li>读者借书
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adReturnBook.html">
+                    <li>读者还书
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adAddBook.html">
+                    <li>新书入库
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adOutBook.html">
+                    <li>图书出库
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adAlterBook.html">
+                    <li>修改图书信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adCheckBook.html">
+                    <li>查阅借阅记录
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adSearchBook.html">
+                    <li>查阅图书信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adPersonal.html">
+                    <li>管理员中心
+                        <div class="trig"></div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- class="ad_data"的div中是图书管理员系统的切换部分 -->
+            <div class="ad_data" id="app">
+                <el-form label-width="80px">
+                    <el-form-item label="借阅号">
+                        <el-col :span="8">
+                            <el-input v-model="temp.userId"/>
+                        </el-col>
+                    </el-form-item>
+                    <el-form-item label="图书编号">
+                        <el-col :span="8">
+                            <el-input v-model="temp.bookId"/>
+                        </el-col>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button-group>
+                            <el-button @click="validateBook">
+                                验证
+                            </el-button>
+
+                            <el-button @click="clearAll">
+                                清空
+                            </el-button>
+                        </el-button-group>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-table stripe
+                                  :data="rec"
+                                  style="width: 100%">
+                            <el-table-column
+                                    prop="userId"
+                                    label="借阅号"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="bookName"
+                                    label="图书名"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="shouldTime"
+                                    label="应还日期">
+                            </el-table-column>
+                        </el-table>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button @click="borrowBooks">确认借阅</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+
+        data: {
+
+            temp: {
+                userId: '',
+                bookId: '',
+                borrowNum: 0
+            },
+            rec: []
+        },
+        methods: {
+            clearAll: function () {
+                this.rec = [];
+                this.temp.borrowNum = this.rec.length;
+            },
+            validateBook: function () {
+                var _this = this;
+                axios.post("/bookAdmin/bookInLab", _this.temp
+                ).then(function (value) {
+                    var bookRec = value.data.data;
+                    if (!_this.parseInfo(value)) return;
+                    _this.rec.push(bookRec);
+                    _this.temp.borrowNum++;
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            },
+            borrowBooks: function () {
+                var _this = this;
+                axios.post("/bookAdmin/borrowBook", _this.rec
+                ).then(function (value) {
+                    if (!_this.parseInfo(value)) return;
+                    _this.$message("借阅成功");
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+                _this.clearAll();
+            },
+            parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0)
+                    return true;
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+    })
+</script>
+</body>
+</html>

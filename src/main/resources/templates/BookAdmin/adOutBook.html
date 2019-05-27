@@ -1,0 +1,192 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理员-图书出库</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adMain.css" th:href="@{/style/adMain.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adBook.css" th:href="@{/style/adBook.css}">
+    <script type="text/javascript" src="../../static/script/jquery-2.1.4.min.js"
+            th:href="@{/script/jquery-2.1.4.min.js}"></script>
+    <!-- 引入组件库 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".left ul li:eq(3)").css("color", "#FFF");
+            $(".left ul li:eq(3)").css("background-color", "#BBCAF1");
+            $(".left ul").find('li:eq(3)').children(".trig").css('display', 'block');
+            $(".data input").attr('disabled', 'true');
+            $(".data input").eq(0).removeAttr('disabled');
+        });
+    </script>
+</head>
+<body>
+<div class="ad_page">
+    <div class="header">
+        <img src="../images/logo.png">
+        <div class="state">
+            <div class="ad_name">
+                <div class="fa_i"><i class="fa fa-user"></i></div>
+                <a href="/bookAdmin/adPersonal.html">管理员01</a></div>
+            <div class="out"><a href="../html/index.html">退出</a></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <ul>
+                <a href="/bookAdmin/adBorrowBook.html">
+                    <li>读者借书
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adReturnBook.html">
+                    <li>读者还书
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adAddBook.html">
+                    <li>新书入库
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adOutBook.html">
+                    <li>图书出库
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adAlterBook.html">
+                    <li>修改图书信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adCheckBook.html">
+                    <li>查阅借阅记录
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adSearchBook.html">
+                    <li>查阅图书信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adPersonal.html">
+                    <li>管理员中心
+                        <div class="trig"></div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- class="ad_data"的div中是图书管理员系统的切换部分 -->
+            <el-form id="app" label-width="80px">
+                <el-form-item label="图书编号">
+                    <el-col :span="8">
+                        <el-input v-model="book.bookId" @keyup.enter.native="validate"></el-input>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="图书名称">
+                    <el-input :disabled="ban" v-model="book.bookName"></el-input>
+                </el-form-item>
+                <el-form-item label="作者">
+                    <el-input :disabled="ban" v-model="book.author"></el-input>
+                </el-form-item>
+                <el-form-item label="译者">
+                    <el-input :disabled="ban" v-model="book.translator"></el-input>
+                </el-form-item>
+                <el-form-item label="价格">
+                    <el-input :disabled="ban" v-model="book.price" type="number"></el-input>
+                </el-form-item>
+                <el-form-item label="ISBN编码">
+                    <el-input :disabled="ban" v-model="book.isbnCode"></el-input>
+                </el-form-item>
+                <el-form-item label="出版社">
+                    <el-input :disabled="ban" v-model="book.comeUpTime"></el-input>
+                </el-form-item>
+                <el-form-item label="出版日期">
+                    <el-col :span="11">
+                        <el-date-picker type="date" placeholder="选择日期" v-model="book.publishCompany"
+                                        style="width: 100%;"></el-date-picker>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="入库者">
+                    <el-input :disabled="ban" v-model="book.enteringMen"></el-input>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button-group>
+                        <el-button type="info" @click="delete_submit">删除图书</el-button>
+                        <el-button type="info">取消</el-button>
+                    </el-button-group>
+                </el-form-item>
+
+            </el-form>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            ban: true,
+            book: {
+                bookId: '',
+                bookName: '',
+                author: '',
+                translator: '',
+                price: '',
+                isbnCode: '',
+                comeUpTime: '',
+                publishCompany: '',
+                state: '',
+                enteringMen: '',
+                enteringDate: ''
+            }
+        },
+        methods: {
+            unban_input: function () {
+                // this.ban = false;
+            },
+            validate: function () {
+                var _this = this;
+                axios.post("/bookAdmin/oneBook ", _this.book).then(function (value) {
+                    var s_data = value.data;
+                    if (!_this.parseInfo(value)) return;
+                    // _this.parseInfo(value);
+                    var has = s_data.data;
+                    if (has != null) {
+                        _this.book = has;
+                        // _this.ban = false;
+                        return;
+                    }
+                    _this.$message("不存在对象");
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            }, delete_submit: function () {
+                var _this = this;
+                axios.post("/bookAdmin/deleteBook", _this.book).then(function (value) {
+                    parseInfo(value)
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            }, cancle_submit: function () {
+                this.ban = true;
+            }, parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0) {
+                    return true;
+                }
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+    })
+</script>
+</html>

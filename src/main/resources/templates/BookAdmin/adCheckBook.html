@@ -1,0 +1,236 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>图书管理员-借阅查询</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adMain.css" th:href="@{/style/adMain.css}">
+    <link rel="stylesheet" type="text/css" href="../../style/adCheckBook.css" th:href="@{/style/adCheckBook.css}">
+    <script type="text/javascript" src="../../static/script/jquery-2.1.4.min.js"
+            th:href="@{/script/jquery-2.1.4.min.js}"></script>
+    <!-- 引入组件库 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var left_li = $(".left ul li:eq(5)");
+            left_li.css("color", "#FFF");
+            left_li.css("background-color", "#BBCAF1");
+            $(".left ul").find('li:eq(5)').children(".trig").css('display', 'block');
+            $(".table tbody tr:odd").css("backgroundColor", "#E3F2F5");
+        });
+    </script>
+</head>
+<body>
+<div class="ad_page">
+    <div class="header">
+        <img src="../images/logo.png">
+        <div class="state">
+            <div class="ad_name">
+                <div class="fa_i"><i class="fa fa-user"></i></div>
+                <a href="/bookAdmin/adPersonal.html">管理员01</a></div>
+            <div class="out"><a href="../html/index.html">退出</a></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <ul>
+                <a href="/bookAdmin/adBorrowBook.html">
+                    <li>读者借书
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adReturnBook.html">
+                    <li>读者还书
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adAddBook.html">
+                    <li>新书入库
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adOutBook.html">
+                    <li>图书出库
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adAlterBook.html">
+                    <li>修改图书信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adCheckBook.html">
+                    <li>查阅借阅记录
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adSearchBook.html">
+                    <li>查阅图书信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a href="/bookAdmin/adPersonal.html">
+                    <li>管理员中心
+                        <div class="trig"></div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- class="ad_data"的div中是图书管理员系统的切换部分 -->
+            <div class="ad_data">
+                <el-form id="app">
+                    <el-form-item>
+                        <el-col :span="12">
+                            <el-input type="text" name="content" v-model="content" placeholder="输入搜索信息" width="60%"/>
+                        </el-col>
+                        <el-button class="btn" id="search-btn" @click="send" type="primary">搜索</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-table stripe
+                                  :data="tableData"
+                                  style="width: 100%">
+                            <el-table-column
+                                    prop="book_id"
+                                    label="图书编号"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="book_name"
+                                    label="图书名称"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="author"
+                                    label="作者"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="translator"
+                                    label="译者"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="price"
+                                    label="价格"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="publish_company"
+                                    label="出版社"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="come_up_time"
+                                    label="出版日期"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="isbn_code"
+                                    label="ISBN编码"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="entering_men"
+                                    label="入库者"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="borrow_id"
+                                    label="借阅号"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="should_time"
+                                    label="应还日期"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="return_time"
+                                    label="实还日期"
+                                    width="180">
+                            </el-table-column>
+                        </el-table>
+                    </el-form-item>
+                    <el-form-item :center="true">
+                        <el-col :span="4">
+                            <el-button id="pre_btn" type="button" @click="dec()">上一页</el-button>
+                        </el-col>
+                        <el-col :span="10">
+                            <el-input type="number" id="curPage" name="currentPage" value="1" v-model="currentPage"/>
+                        </el-col>
+                        <el-col :span="4">
+                            <el-button id="next_btn" type="button" @click="inc()">下一页</el-button>
+                        </el-col>
+                    </el-form-item>
+                </el-form>
+
+
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        // borrow_id,
+        // user_id,
+        // should_time,
+        // return_time,
+        // book_id,
+        // book_id,
+        // book_name,
+        // author,
+        // translator,
+        // price,
+        // isbn_code,
+        // come_up_time,
+        // publish_company,
+        // state,
+        // entering_men,
+        // entering_date
+        data: {
+            content: '',
+            currentPage: 1,
+            tableData: []
+        },
+        methods: {
+            inc: function () {
+                this.currentPage += 1;
+            },
+            dec: function () {
+                this.currentPage -= 1;
+            },
+            send: function () {
+                var _this = this;
+                axios.post("/bookAdmin/searchBookIORec",
+                    {
+                        content: _this.content,
+                        currentPage: _this.currentPage
+                    }).then(function (value) {
+                    var s_data = value.data.data;
+                    if (!_this.parseInfo(value)) return;
+                    _this.tableData = s_data.data;
+                    _this.currentPage = s_data.currentPage;
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            },
+            parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0)
+                    return true;
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+    })
+</script>
+</html>

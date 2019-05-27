@@ -1,0 +1,171 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>系统管理员-录入管理员</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adminMain.css" th:href="@{/style/adminMain.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adminAddReader.css"
+          th:href="@{/style/adminAddReader.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adminReader.css"
+          th:href="@{/style/adminReader.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/searchTable.css"
+          th:href="@{/style/searchTable.css}">
+    <script type="text/javascript" src="../../static/script/jquery-2.1.4.min.js"
+            th:src="@{/script/jquery-2.1.4.min.js}"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".left ul li:eq(3)").css("color", "#FFF");
+            $(".left ul li:eq(3)").css("background-color", "#B78DE7");
+            $(".left ul").find('li:eq(3)').children(".trig").css('display', 'block');
+        });
+    </script>
+</head>
+<body>
+<div class="ad_page">
+    <div class="header">
+        <img src="../images/logo.png">
+        <div class="state">
+            <div class="ad_name">
+                <div class="fa_i"><i class="fa fa-user"></i></div>
+
+                <a th:href="@{/sysAdmin/adminPersonal.html}">管理员01</a></div>
+            <div class="out"><a href="/loginOut">退出</a></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <ul>
+                <a th:href="@{/sysAdmin/adminAddReader.html}">
+                    <li>录入新读者
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminOutReader.html}">
+                    <li>删除读者
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAlterReader.html}">
+                    <li>修改读者信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAddAd.html}">
+                    <li>录入图书管理员
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminOutAd.html}">
+                    <li>删除图书管理员
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAlterAd.html}">
+                    <li>修改管理员信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminSearchReader.html}">
+                    <li>查看读者信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminSearchAd.html}">
+                    <li>查看管理员信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminPersonal.html}">
+                    <li>管理员中心
+                        <div class="trig"></div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- class="ad_data"的div中是系统管理员系统的切换部分 -->
+            <el-form id="app" label-width="80px">
+                <el-form-item label="编号">
+                    <el-col :span="8">
+                        <el-input v-model="bookAdmin.adid"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="用户名">
+                    <el-col :span="8">
+                        <el-input v-model="bookAdmin.adname"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="初始密码">
+                    <el-col :span="8">
+                        <el-input v-model="bookAdmin.adpassword"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="电话">
+                    <el-col :span="8">
+                        <el-input v-model="bookAdmin.adphone"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-col :span="8">
+                        <el-input v-model="bookAdmin.ademail"/>
+                    </el-col>
+                </el-form-item>
+
+                <el-form-item>
+                    <el-button-group>
+                        <el-button type="info" @click="submit">添加</el-button>
+                        <el-button type="info">取消</el-button>
+                    </el-button-group>
+                </el-form-item>
+            </el-form>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            bookAdmin: {
+                adid: '',
+                adname: '',
+                adpassword: '',
+                adphone: '',
+                ademail: ''
+            }
+        },
+        methods: {
+            submit: function () {
+                var _this = this;
+                axios.post("/sysAdmin/insertBookAdmin", _this.bookAdmin).then(function (value) {
+                    _this.parseInfo(value);
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            }
+            ,
+            parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0) {
+                    _this.$message("插入成功");
+                    return true;
+                }
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+
+    })
+
+</script>
+</html>

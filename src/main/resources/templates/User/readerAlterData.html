@@ -1,0 +1,123 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>修改资料</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/readerMain.css" th:href="@{/style/readerMain.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/readerAlterData.css"
+          th:href="@{/style/readerAlterData.css}">
+
+    <script type="text/javascript" src="../../static/script/jquery-2.1.4.min.js"
+            th:href="@{/script/jquery-2.1.4.min.js}"></script>
+
+    <!-- 引入组件库 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var Lis = $(".menu ul li").eq(1);
+            Lis.css('border-bottom', '7px solid #419EDC');
+            Lis.css('margin-top', '-7px');
+            Lis.css('color', '#419EDC');
+        })
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="header">
+        <div class="home_logo"><a href="/index.html"><i class="fa fa-home">首页</i></a></div>
+        <div class="page_title">个人中心</div>
+        <div class="out_page" ><a href="/loginOut">退出</a></div>
+
+    </div>
+</div>
+<div class="book_logo">
+    <img src="../images/booklogo.png">
+</div>
+<div class="reader_name">张三</div>
+
+<div class="menu">
+    <ul>
+        <a href="./readerPersonal.html" th:href="@{/user/readerPersonal.html}">
+            <li class="first_li">基本资料</li>
+        </a>
+        <a href="./readerAlterData.html" th:href="@{/user/readerAlterData.html}">
+            <li class="other_li">修改资料</li>
+        </a>
+        <a href="./readerAlterPaswd.html" th:href="@{/user/readerAlterPaswd.html}">
+            <li class="other_li">修改密码</li>
+        </a>
+        <a href="./readerBorrowing.html" th:href="@{/user/readerBorrowing.html}">
+            <li class="other_li">在借图书</li>
+        </a>
+        <a href="./readerBorrowed.html" th:href="@{/user/readerBorrowed.html}">
+            <li class="last_li">借阅记录</li>
+        </a>
+    </ul>
+    <div class="clear"></div>
+</div>
+<!-- class="content"的div中是个人中心的切换部分 -->
+<div class="content">
+    <el-form id="app" label-width="80px">
+
+        <el-form-item label="邮箱">
+            <el-input  v-model="user.email"></el-input>
+        </el-form-item>
+        <el-form-item label="电话">
+            <el-input v-model="user.phone"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button @click="submit">确认修改</el-button>
+        </el-form-item>
+    </el-form>
+
+</div>
+<div class="footer">
+    <br/>
+    <p>@Copyright重庆理工大学中山图书馆</p>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            user: {
+                email: '',
+                phone: ''
+            }
+        },
+        created: function () {
+            var _this = this;
+            axios.post("/user/getUser").then(function (value) {
+                _this.user = value.data.data;
+            }).catch(function (error) {
+                _this.$message('出现错误:' + error);
+            });
+        },
+        methods: {
+            submit: function () {
+                var _this = this;
+                axios.post("/user/updateUser", _this.user).then(function (value) {
+                    _this.parseInfo(value);
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            }, parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0) {
+                    this.$message("更新成功")
+                    return true;
+                }
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+
+    })
+</script>
+</html>

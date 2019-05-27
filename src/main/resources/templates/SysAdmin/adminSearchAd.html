@@ -1,0 +1,192 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>系统管理员-查看管理员信息</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adminMain.css" th:href="@{/style/adminMain.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adminAddReader.css"
+          th:href="@{/style/adminAddReader.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/adminReader.css"
+          th:href="@{/style/adminReader.css}">
+    <link rel="stylesheet" type="text/css" href="../../static/style/searchTable.css"
+          th:href="@{/style/searchTable.css}">
+    <script type="text/javascript" src="../../static/script/jquery-2.1.4.min.js"
+            th:src="@{/script/jquery-2.1.4.min.js}"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".left ul li:eq(7)").css("color", "#FFF");
+            $(".left ul li:eq(7)").css("background-color", "#B78DE7");
+            $(".left ul").find('li:eq(7)').children(".trig").css('display', 'block');
+            $(".table tbody tr:odd").css("backgroundColor", "#DFF0D8");
+        });
+    </script>
+</head>
+<body>
+<div class="ad_page">
+    <div class="header">
+        <img src="../images/logo.png">
+        <div class="state">
+            <div class="ad_name">
+                <div class="fa_i"><i class="fa fa-user"></i></div>
+                <a th:href="@{/sysAdmin/adminPersonal.html}">管理员01</a></div>
+            <div class="out"><a href="/loginOut">退出</a></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <ul>
+                <a th:href="@{/sysAdmin/adminAddReader.html}">
+                    <li>录入新读者
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminOutReader.html}">
+                    <li>删除读者
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAlterReader.html}">
+                    <li>修改读者信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAddAd.html}">
+                    <li>录入图书管理员
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminOutAd.html}">
+                    <li>删除图书管理员
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminAlterAd.html}">
+                    <li>修改管理员信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminSearchReader.html}">
+                    <li>查看读者信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminSearchAd.html}">
+                    <li>查看管理员信息
+                        <div class="trig"></div>
+                    </li>
+                </a>
+                <a th:href="@{/sysAdmin/adminPersonal.html}">
+                    <li>管理员中心
+                        <div class="trig"></div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- class="ad_data"的div中是系统管理员系统的切换部分 -->
+            <div class="ad_data" id="app">
+                <el-form action="/bookAdmin/search" method="post" id="form">
+                    <el-form-item>
+                        <el-col :span="12">
+                            <el-input type="text" name="content" v-model="content"
+                                      placeholder="输入搜索信息" width="60%"/>
+                        </el-col>
+                        <el-button class="btn" id="search-btn" @click="send" type="primary">搜索</el-button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-table stripe
+                                  :data="tableData"
+                                  style="width: 100%">
+                            <el-table-column
+                                    prop="adid"
+                                    label="编号"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="adname"
+                                    label="用户名"
+                                    width="180">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="adphone"
+                                    label="电话">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="ademail"
+                                    label="邮箱">
+                            </el-table-column>
+                        </el-table>
+                        <el-form-item :center="true">
+                            <el-col :span="4">
+                                <el-button id="pre_btn" type="button" @click="dec(-1)">上一页</el-button>
+                            </el-col>
+                            <el-col :span="10">
+                                <el-input type="number" id="curPage" name="currentPage" value="1"
+                                          v-model="currentPage"/>
+                            </el-col>
+                            <el-col :span="4">
+                                <el-button id="next_btn" type="button" @click="inc(1)">下一页</el-button>
+                            </el-col>
+                        </el-form-item>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    new Vue({
+        el: '#app',
+
+        data: {
+            content: '',
+            currentPage: 1,
+            tableData: []
+        },
+        methods: {
+            inc: function () {
+                this.currentPage += 1;
+            },
+            dec: function () {
+                this.currentPage -= 1;
+            },
+            send: function () {
+                var _this = this;
+                axios.post("/sysAdmin/searchBookAdmin",
+                    {
+                        content: _this.content,
+                        currentPage: _this.currentPage
+                    }).then(function (value) {
+                    var s_data = value.data.data;
+                    if (!_this.parseInfo(value)) return;
+                    _this.tableData = s_data.data;
+                    _this.currentPage =s_data.currentPage;
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            },
+            parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0)
+                    return true;
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
+        }
+    })
+
+
+</script>
+</html>
