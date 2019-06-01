@@ -1,5 +1,15 @@
 # 图书管理系统（bookmangement）
-重庆理工大学专业实习 微信+Web：图书管理系统
+重庆理工大学专业实习 微信+Web：图书管理系统；欢迎下载，Star![img](./imageForMD/078CC1B4.png),提交错误报告
+
+# 实现技术
+
+## 后台
+
+SpringBoot+ThyMeleaf+Mybatis+Maven
+
+## 前台
+
+微信小程序+Vue
 
 # 功能介绍
 
