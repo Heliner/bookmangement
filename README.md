@@ -31,7 +31,7 @@
 
 <center>登陆界面</center>
 
-![图书搜索](.\ImageForMD\1559390412395.png)
+![图书搜索](./ImageForMD/1559390412395.png)
 
 <center>图书搜索</center>
 
@@ -39,7 +39,7 @@
 
 ## 网页端
 
-![1559389830677](.\ImageForMD\1559389830677.png)
+![1559389830677](./ImageForMD/1559389830677.png)
 
 <center>登陆界面</center>
 
