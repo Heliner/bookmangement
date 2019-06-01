@@ -1,0 +1,39 @@
+<!--pages/readerBorrowing/readerBorrowing.wxml-->
+<view class='contain'>
+
+   <view class='header'>
+        <view class='logo'>
+          <image src='/image/logo.png'  
+          style="height:120rpx;width:450rpx;float:left" mode='aspectFit'>    
+          </image>       
+        </view> 
+        <view class='text' >
+            <text  bindtap='goIndex' >首页</text>
+        </view>
+       
+    </view>
+
+  <view class='content'>
+  <view class='record'>
+    <text class='re'>已借<text class='re1'>{{borrowingInfo[0].borrowedNum}}</text> 本，还可借 <text class='re1'>{{borrowingInfo[0].canBorrowNum}}</text>本</text>
+  </view>
+  <view class='table'>
+    <view class='tr thead'>
+      <view class='td'>编号</view>
+      <view class='td'>借阅号</view>
+      <view class='td'>名称</view>
+      <view class='td'>应还日期</view>
+    </view>
+    <view class='tr' wx:for='{{borrowingInfo}}'>
+      <view class='td'>{{item.borrow_id}}</view>
+      <view class='td'>{{item.user_id}}</view>
+      <view class='td'>{{item.book_name}}</view>
+      <view class='td'>{{item.should_time}}</view>
+    </view>
+    </view>
+  </view>
+
+
+</view>
+
+ 

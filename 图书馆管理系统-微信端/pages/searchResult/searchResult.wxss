@@ -1,0 +1,104 @@
+
+page{
+  height:100%;
+}
+.contain{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.header{
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.logo{
+  float: left;
+  width: 225p;
+  height: 60px;
+ 
+}
+
+.text{
+ float: left;
+ width:300rpx;
+ height:50rpx;
+ text-align: center;
+ margin-top:30rpx; 
+ 
+}
+
+.text text{
+  color: #B2DFEE;
+}
+
+.sear{
+  margin-left:5%;
+  float:left;
+  width:90%;
+  margin-top: 10rpx;
+  border: 1px #B2DFEE solid;
+}
+
+.search{
+  float:left;
+  width:85%;
+  margin-top: 10rpx;
+  margin-left:2%;
+  border: 5rpx #B2DFEE solid;
+}
+.icon{
+  margin-top:10rpx;
+  margin-left:10rpx;
+}
+
+
+
+.content{
+
+}
+
+
+.table{
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+   border-top: 1rpx solid #419EDC;
+   border-left: 1rpx solid #419EDC;
+   margin-left: 2%
+}
+
+.tr{
+  
+  display: flex;
+  flex-direction: row;
+}
+.thead .td{
+  text-align: center;
+  font-weight: bold;
+  align-content: center;
+}
+
+.td{
+ text-align: center;
+  border-right: 1rpx solid #419EDC;
+  border-bottom: 1rpx solid #419EDC;
+}
+.tr .td:first-child{
+  flex: 1;
+}
+.tr .td:nth-child(2){
+  flex:3;
+}
+.tr .td:nth-child(3){
+  flex: 2;
+}
+.tr .td:nth-child(4){
+  flex: 1;
+}
+

@@ -1,0 +1,40 @@
+<!--pages/index1/index1.wxml-->
+<view class='contain' >
+    <view class='header'>
+        <view class='logo'>
+          <image src='/image/logo.png'  
+          style="height:120rpx;width:450rpx;float:left" mode='aspectFit'>    
+          </image>       
+        </view> 
+        <view class='text' >
+            <text  bindtap='goPersonal' >个人中心</text>
+        </view>
+    </view>
+
+     <view class='sear'> 
+       <input class='search' type='text' name='search' placeholder='图书名' bindinput='Getinput'></input>
+       <icon class='icon' type='search' bindtap='goSearchBook' size='30' color='#B2DFEE'/> 
+    </view>
+
+    <view class='Img'>
+       <swiper indicator-dots='true' autoplay='true' interval='3000' duration='3000' circular='true' style='height:100%'>
+        <swiper-item wx:for="{{listImg}}">
+          <image src='{{item}}' ></image>
+        </swiper-item>
+        
+       </swiper>
+    </view>  
+    <view class="example">
+      <view class="marquee_box">
+        <view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;">
+          <text>{{text}}</text>
+          <text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;">{{text}}</text>
+        </view>
+      </view>
+    </view>
+     
+
+</view>
+
+
+

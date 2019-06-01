@@ -1,0 +1,70 @@
+<!--pages/adAlterBook/adAlterBook.wxml-->
+<!--pages/adOutBook/adOutBook.wxml-->
+<view class='certain'>
+  <view class='logo'>
+    <image src='/image/logo.png' style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>
+    </image>
+    <image class='booklogo' src='/image/booklogo.png' style="height:150rpx; width:300rpx; float:left" mode='aspectFit'> </image>
+  </view>
+
+  <view class='content'>
+    <view class='form'>
+      <form bindsubmit='updateBook'>
+        <view class='input'>
+          <view class='data'>
+        <label>图书编号</label>    <input name='bookId' value="{{book.bookId}}" placeholder='请输入图书编号' bindinput='changeInput' bindblur='volidateBook'></input>
+          </view>
+          <view class='data'>
+            <label>图书名称</label>
+            <input value='{{book.bookName}}' name='bookName'></input>
+          </view>
+          <view class='data'>
+            <label>作者</label>
+            <input value='{{book.author}}'name='author'></input>
+          </view>
+          <view class='data'>
+            <label>译者</label>
+            <input value='{{book.translator}}'name='translator'></input>
+          </view>
+          <view class='data'>
+            <label>价格</label>
+            <input value='{{book.price}}'name='price'></input>
+          </view>
+          <view class='data'>
+            <label>出版社</label>
+            <input value='{{book.publishCompany}}'name='publishCompany'></input>
+          </view>
+          <view class='data'>
+            <label>出版日期</label>
+            <input value='{{book.comeUpTime}}'name='comeUpTime'></input>
+          </view>
+          <view class='data'>
+            <label>入库者</label>
+            <input value='{{book.enteringMen}}'name='enteringMen'></input>
+          </view>
+          <view class='data'>
+            <label>ISBN</label>
+            <input value='{{book.isbnCode}}'name='isbnCode'></input>
+          </view>
+          <view class='data'>
+            <label>入库时间</label>
+            <input value='{{book.enteringDate}}'name='enteringDate'></input>
+          </view>
+        </view>
+        <view class='Button'>
+          <view class='button'>
+            <button class="Btn" type='primary' form-type='submit' style='background-color: #419EDC'>更新</button>
+          </view>
+          <view class='button'>
+            <button class="Btn" type='primary' form-type='reset' style='background-color: #419EDC'>重置
+            </button>
+          </view>
+        </view>
+
+      </form>
+
+    </view>
+
+  </view>
+
+</view>

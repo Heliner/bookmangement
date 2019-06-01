@@ -1,0 +1,20 @@
+<!--pages/Bookad/Bookad.wxml-->
+<view class='logo'>
+      <image src='/image/logo.png'  
+      style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>    
+      </image>
+</view>
+<view class='header'>
+    <text></text><text bindtap='exit'>退出</text>
+</view>
+
+<view class='content'>
+   <view class='con' bindtap='adBorrowBook'><text>读者借书</text></view>
+   <view class='con' bindtap='adReturnBook'><text>读者还书</text></view>
+   <view class='con' bindtap='adAddBook'><text>新书入库</text></view>
+   <view class='con' bindtap='adOutBook'><text>图书出库</text></view>
+   <view class='con' bindtap='adAlterBook'><text>修改图书信息</text></view>
+   <view class='con' bindtap='adCheckBook'><text>查阅借阅记录</text></view>
+   <view class='con' bindtap='adSearchBook'><text>查阅图书信息</text></view>
+   <view class='con' bindtap='adPersonal'><text>管理员中心</text></view>  
+</view>

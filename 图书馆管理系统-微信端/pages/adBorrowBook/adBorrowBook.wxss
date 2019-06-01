@@ -1,0 +1,102 @@
+/* pages/adBorrowBook/adBorrowBook.wxss */
+
+.logo{
+  height:200rpx; 
+}
+
+.content{
+	width: 90%;
+  height: 1000rpx;
+  border:5px solid #419EDC;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 15px;
+
+}
+
+.form{
+  height: 500rpx;
+}
+
+.data{
+ 			width: 100%;
+       height: 45px;
+       line-height: 35px;
+       margin-bottom: 5px;
+ 		}
+	 		.input label{
+	              font-size:18px; 
+                float: left;
+                margin-left: 5%;
+                margin-top:40rpx;
+                color: #515567;
+                font-weight: bold;
+	 		}
+	 		.input input{
+	             width: 350rpx;
+               height: 20px;
+               border: 1px solid #ccc; 
+               float: right;
+               margin-right: 50rpx;
+               margin-top:20rpx;
+               font-size: 20px;
+               border-radius: 5px;
+               padding: 6px 12px;
+	 		}
+
+
+
+
+.Button{
+  flex:row;
+  width: 100%;
+  height: auto;
+  background-color: #f2f2f2;
+  margin-top: 0px;
+  margin-bottom: 0px;
+ padding-bottom: 0px;
+}
+.Btn{
+  float: left;
+  width: 35%;
+  margin-left:60rpx;
+  margin-top: 35px;
+}
+
+
+table{
+  width: 70%;
+  display: flex;
+   flex-direction: column;
+   border-top: 1rpx solid #419EDC;
+   border-left: 1rpx solid #419EDC;
+}
+
+.tr{
+  display: flex;
+  flex-direction: row;
+}
+
+.thead {
+  border-top: 1rpx solid #419EDC;
+}
+.thead .td{
+  text-align: center;
+  font-weight: bold;
+  align-content: center;
+}
+
+.td{
+ text-align: center;
+  border-right: 1rpx solid #419EDC;
+  border-bottom: 1rpx solid #419EDC;
+}
+.tr .td:first-child{
+  flex: 3;
+}
+.tr .td:nth-child(2){
+  flex:4 ;
+}
+.tr .td:nth-child(3){
+  flex: 4;
+}

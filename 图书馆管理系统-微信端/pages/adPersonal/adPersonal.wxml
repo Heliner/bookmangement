@@ -1,0 +1,53 @@
+<view class='certain'>
+    <view class='logo'>
+      <image src='/image/logo.png'  
+      style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>    
+      </image>
+      <image class='booklogo' src='/image/booklogo.png'
+      style="height:150rpx; width:300rpx; float:left" mode='aspectFit'>              </image>
+    </view>
+
+    <view class='content'>
+        <view class='form'>
+            <view class='Bth1'>
+                 <button class="Btn1"  type='primary'   
+                  
+                   style='background-color: #419EDC;width:400rpx;height:80rpx;' bindtap='goInput'>修改资料</button> 
+            </view>
+           <form bindsubmit='goAlter'>
+              <view class='data'>
+                <label>原有密码</label><input disabled='{{inputflag}}' type="password" name="adpassword"></input>
+                <label>新密码</label><input  disabled='{{inputflag}}' type="password" name="adnPassword"></input>
+                <label>确认密码</label><input  disabled='{{inputflag}}'  type="password" name="adcPassword"></input>
+                <label>电话</label><input disabled='{{inputflag}}'  type='text' name="adphone"></input>
+                <label>邮箱</label><input  disabled='{{inputflag}}'  type='text' name="ademail"></input>
+              </view>
+              
+              <view class='Button'>
+                <view class='button'>
+                   <button class="Btn"  type='primary'   
+                   form-type='submit'  
+                   style='background-color: #419EDC'>确认修改</button> 
+                </view>
+                <view class='button'>
+                   <button class="Btn" type='primary'   
+                   form-type='reset'  
+                   style='background-color: #419EDC'>取消</button> 
+                </view>
+              </view>
+
+           </form>
+           
+        </view>
+        
+    
+    
+    </view>
+
+
+
+
+
+
+
+</view>

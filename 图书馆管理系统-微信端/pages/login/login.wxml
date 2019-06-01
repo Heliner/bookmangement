@@ -1,0 +1,67 @@
+<!--pages/login/login.wxml-->
+    <view class='logimage'>
+        <image mode='aspectFit'  src='/image/logo.png' 
+        style='height:100rpx;display:block;'></image>
+    </view>
+   
+    <view class="container" style="background-image: url('/image/bg.png');  ">  
+      <!-- <view class="login-icon">  
+        <image class="login-img" src="../image/loginLog.jpg"></image>  
+      </view>   -->
+     
+      <view class='form'>
+        <form bindsubmit='goLogin' bindreset='goReset'>
+          <!--用户按钮-->
+          <view class='Userchoose'>
+           <radio-group name="role">
+             <label>
+               <radio value="{{ra1}}"></radio>读者
+             </label>
+              <label>
+               <radio value="{{ra2}}"></radio>图书管理员
+             </label>
+              <label>
+               <radio value="{{ra3}}"></radio>系统管理员
+             </label>      
+           </radio-group>
+          </view>
+        
+        <!--账号-->  
+        <view class="inputView inputOne">  
+          <image class="nameImage" src="/image/1.png"></image>  
+          <label class="loginLab" >账号</label>  
+          <input class="inputText" placeholder="请输入账号"                                      name="userId" />  
+        </view>  
+        <view class="line"></view>  
+      
+        <!--密码-->  
+        <view class="inputView">  
+          <image class="keyImage" src="/image/2.png"></image>  
+          <label class="loginLab">密码</label>  
+          <input class="inputText" name="password"  password="true" placeholder="请输入密码"  />  
+        </view>  
+        <view class='title'  wx:if='{{isshow}}'>
+        <text>密码强度太弱</text>
+        </view>
+
+        <view class='forget'>
+           <text bindtap=''>忘记密码？</text>
+        </view>
+      
+        <!--按钮-->  
+        <view class="loginBtnView"> 
+        <view class='button'></view> 
+          <button class="loginBtn" name="login" type='primary' 
+          form-type='submit'  loading="{{loading}}">登录
+          </button>  
+        </view>  
+        <view class='button'>
+          <button class="loginBtn" name="reset" type='primary' 
+          form-type='reset' loading="{{loading}}">重置 </button>  
+        </view>
+     
+      </form>
+      </view>
+
+      
+    </view>  

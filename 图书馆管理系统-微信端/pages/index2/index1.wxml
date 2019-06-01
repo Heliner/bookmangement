@@ -1,0 +1,32 @@
+<!--pages/index1/index1.wxml-->
+<view class='contain' >
+    <view class='header'>
+        <view class='logo'>
+          <image src='/image/logo.png'  
+          style="height:120rpx;width:450rpx;float:left" mode='aspectFit'>    
+          </image>       
+        </view> 
+        <view class='text' >
+            <text  bindtap='goPersonal' >个人中心</text>
+        </view>
+       
+    </view>
+      
+      
+    <view class='sear'> 
+       <input class='search' type='text' name='search' placeholder='' bindinput='Getinput'></input>
+       <icon class='icon' type='search' bindtap='goSearchBook' size='30' color='#B2DFEE'/> 
+    </view>
+    
+    <view class='book'>
+      <view class='bookslist' wx:for="{{booklist}}">
+       <image class='picture' src='{{item.image}}' mode='aspectFit'></image>
+       <view class='bookname'>{{item.name}}</view>
+      </view>
+    </view>
+    
+      
+
+           
+
+</view>

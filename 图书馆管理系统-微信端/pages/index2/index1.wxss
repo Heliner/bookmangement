@@ -1,0 +1,78 @@
+/* pages/index1/index1.wxss */
+page{
+  height:100%;
+}
+.contain{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.header{
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.logo{
+  float: left;
+  width: 225p;
+  height: 60px;
+ 
+}
+
+.text{
+ float: left;
+ width:300rpx;
+ height:50rpx;
+ text-align: center;
+ margin-top:30rpx; 
+ 
+}
+
+.text text{
+  color: #B2DFEE;
+}
+
+.sear{
+  margin-left:5%;
+  float:left;
+  width:90%;
+  margin-top: 10rpx;
+  border: 1px #B2DFEE solid;
+}
+
+.search{
+  float:left;
+  width:85%;
+  margin-top: 10rpx;
+  margin-left:2%;
+  border: 5rpx #B2DFEE solid;
+}
+.icon{
+  margin-top:10rpx;
+  margin-left:10rpx;
+}
+
+.bookslist{
+  float: left;
+  width:200rpx;
+  height:330rpx;
+  margin-top: 50rpx;
+  margin-left:30rpx;
+  text-align: center;
+  font-size:14px;
+  border: 1px #B2DFEE solid;
+}
+.picture{
+ 
+  margin-top:-100rpx; 
+  width:180rpx;
+
+}
+.bookname{
+margin-top:-100rpx;
+}

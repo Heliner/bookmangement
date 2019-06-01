@@ -1,0 +1,46 @@
+<!--pages/adCheckBook/adCheckBook.wxml-->
+<view class='certain'>
+  <view class='logo'>
+    <image src='/image/logo.png' style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>
+    </image>
+    <image class='booklogo' src='/image/booklogo.png' style="height:150rpx; width:300rpx; float:left" mode='aspectFit'> </image>
+  </view>
+
+  <view class='content'>
+    <form bindsubmit='search'>
+      <view class='form'>
+        <view class='input'>
+          <input class='search' type='text' name='content' placeholder='请输入图书名称/编号/作者'></input>
+        </view>
+        <view class='Btn'>
+          <button class="loginBtn" name="reset" type='primary' form-type='submit' style=' background-color: #B2DFEE; height:88rpx'>搜索</button>
+        </view>
+      </view>
+      <view style='display:flex;justify-content:justify-content '>
+        <button type='primary' bindtap='dec' style='background-color: #B2DFEE; height:88rpx'>上页</button>
+        <input class='search' type='text' name='currentPage' value="{{currentPage}}" placeholder='1' style='width:50%'></input>
+        <button type='primary' bindtap='inc' style=' background-color: #B2DFEE; height:88rpx'>下页</button>
+      </view>
+    </form>
+
+    <view class='table'>
+      <view class='tr thead'>
+        <view class='td'>借阅号</view>
+        <view class='td'>用户名</view>
+        <view class='td'>借阅上限</view>
+        <view class='td'>借阅期限</view>
+        <view class='td'>在借数量</view>
+      </view>
+      <view class='tr' wx:for='{{tableData}}'>
+        <view class='td'>{{item.userId}}</view>
+        <view class='td'>{{item.userName}}</view>
+        <view class='td'>{{item.max}}</view>
+        <view class='td'>{{item.time}}</view>
+        <view class='td'>{{item.lendedNum}}</view>
+      </view>
+    </view>
+  </view>
+
+
+
+</view>

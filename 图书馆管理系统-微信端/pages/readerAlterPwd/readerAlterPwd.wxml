@@ -1,0 +1,34 @@
+<!--pages/readerAlterPwd/readerAlterPwd.wxml-->
+<view class='contain'>
+  <view class='header'>
+        <view class='logo'>
+          <image src='/image/logo.png'  
+          style="height:120rpx;width:450rpx;float:left" mode='aspectFit'>    
+          </image>       
+        </view> 
+        <view class='text' >
+            <text  bindtap='goIndex' >首页</text>
+        </view>
+       
+    </view>
+  
+
+  <view class='content'>
+      <form bindsubmit='goAlterPwd'>
+          <view class='input'>
+            <view class='data'>
+             <label>原有密码</label><input name="password" type='password'></input>
+             <label>新密码</label><input name="nPassword" type='password'></input>
+             <label>确认密码</label><input name="cPassword" type='password'></input>
+            </view>
+          </view>
+          <view class='button'>
+            <button class="alterBtn" name="alter" type='primary'   
+               form-type='submit' 
+                style='background-color: #419EDC'>提交</button> 
+          </view>
+          
+      </form>
+   </view>
+  
+</view>

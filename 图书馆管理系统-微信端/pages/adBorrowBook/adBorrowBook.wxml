@@ -1,0 +1,58 @@
+<!--pages/adBorrowBook/adBorrowBook.wxml-->
+
+
+<view class='centain'>
+  <view class='logo'>
+    <image src='/image/logo.png' style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>
+    </image>
+    <image class='booklogo' src='/image/booklogo.png' style="height:150rpx; width:300rpx; float:left" mode='aspectFit'> </image>
+  </view>
+
+
+  <view class='content'>
+    <view class='form'>
+      <form bindsubmit='validateBook'>
+        <view class='input'>
+          <label>用户编号</label>
+          <input type='text' name='userId'></input>
+        </view>
+
+        <view class='input'>
+          <label>图书编号</label>
+          <input type='text' name='bookId'></input>
+        </view>
+
+        <view class='Button'>
+          <view class='button'>
+            <button class="Btn" name="certain" type='primary' form-type='submit' style='background-color: #419EDC'>验证</button>
+          </view>
+          <view class='button'>
+            <button class="Btn" name="clear" type='primary' form-type='reset' style='background-color: #419EDC' bindtap="clearAll">清空</button>
+          </view>
+        </view>
+      </form>
+
+    </view>
+
+    <view class='Tab'>
+      <view class='table'>
+        <view class='tr thead'>
+          <view class='td'>借阅号</view>
+          <view class='td'>图书名</view>
+          <view class='td'>应还日期</view>
+        </view>
+        <view class='tr' wx:for='{{rec}}' wx:for-index="index">
+          <view class='td'>{{item.userId}}</view>
+          <view class='td'>{{item.bookName}}</view>
+          <view class='td'>{{item.shouldTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view>
+    <form bindsubmit='borrowBooks'>
+      <button class="Btn" type='primary' style='background-color: #419EDC' form-type='submit'>提交借阅</button>
+    </form>
+  </view>
+</view>

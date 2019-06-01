@@ -1,0 +1,77 @@
+<!--pages/adAddBook/adAddBook.wxml-->
+<view class='certain'>
+  <view class='logo'>
+    <image src='/image/logo.png' style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>
+    </image>
+    <image class='booklogo' src='/image/booklogo.png' style="height:150rpx; width:300rpx; float:left" mode='aspectFit'> </image>
+  </view>
+
+  <view class='content'>
+
+    <view class='menu_left'>
+      <form bindsubmit='goAddBook'>
+        <view class='input'>
+          <form bindsubmit='getSeq'>
+            <view class='data'>
+              <label>图书编号</label>
+              <input name='bookId' value="{{bookId}}"></input>
+              <button class="Btn" type='primary' form-type='submit' style='background-color: #419EDC'>序列</button>
+            </view>
+          </form>
+          <view class='data'>
+            <label>图书名称</label>
+            <input name='bookName'></input>
+          </view>
+          <view class='data'>
+            <label>作者</label>
+            <input name='author'></input>
+          </view>
+          <view class='data'>
+            <label>译者</label>
+            <input name='translator'></input>
+          </view>
+          <view class='data'>
+            <label>价格</label>
+            <input name='price' type='number'></input>
+          </view>
+          <view class='data'>
+            <label>出版社</label>
+            <input name='publishCompany'></input>
+          </view>
+          <view class='data'>
+            <label>出版日期</label>
+            <input name='comeUpTime'></input>
+          </view>
+          <view class='data'>
+            <label>入库者</label>
+            <input name='enteringMen'></input>
+          </view>
+          <view class='data'>
+            <label>ISBN</label>
+            <input name='isbnCode'></input>
+          </view>
+          <view class='data'>
+            <label>入库时间</label>
+            <input name='enteringDate'></input>
+          </view>
+        </view>
+
+        <view class='Button'>
+          <view class='button'>
+            <button class="Btn" name="handup" type='primary' form-type='submit' bindtap="Handup" style='background-color: #419EDC'>确认提交</button>
+          </view>
+          <view class='button'>
+            <button class="Btn" name="cancel" type='primary' form-type='reset' bindtap="Cancel" style='background-color: #419EDC'>取消</button>
+          </view>
+        </view>
+      </form>
+
+    </view>
+
+  </view>
+
+
+
+
+
+</view>

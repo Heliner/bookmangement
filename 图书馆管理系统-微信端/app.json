@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index1/index1",
+    "pages/searchResult/searchResult",
+    "pages/systemad/systemad",
+    "pages/Bookad/Bookad",
+    "pages/adminOutAd/adminOutAd",
+    "pages/adminAddAd/adminAddAd",
+    "pages/adminAlterReader/adminAlterReader",
+    "pages/adminAddReader/adminAddReader",
+    "pages/adminOutReader/adminOutReader",
+    "pages/adminPersonal/adminPersonal",
+    "pages/adminSearchAd/adminSearchAd",
+    "pages/adminSearchReader/adminSearchReader",
+    "pages/adminAlterAd/adminAlterAd",
+    "pages/detail/detail",
+    "pages/adBorrowBook/adBorrowBook",
+    "pages/adReturnBook/adReturnBook",
+    "pages/adAddBook/adAddBook",
+    "pages/adOutBook/adOutBook",
+    "pages/adAlterBook/adAlterBook",
+    "pages/adCheckBook/adCheckBook",
+    "pages/adSearchBook/adSearchBook",
+    "pages/adPersonal/adPersonal",
+    "pages/readerPersonal/readerPersonal",
+    "pages/readerAlterData/readerAlterData",
+    "pages/readerAlterPwd/readerAlterPwd",
+    "pages/readerBorrowing/readerBorrowing",
+    "pages/readerBorrowed/readerBorrowed",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#B2DFEE",
+    "navigationBarTitleText": "图书馆管理系统",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#419EDC",
+    "position": "top",
+    "list": [
+      {
+        "pagePath": "pages/readerPersonal/readerPersonal",
+        "text": "基本资料"
+      },
+      {
+        "pagePath": "pages/readerAlterData/readerAlterData",
+        "text": "修改资料"
+      },
+      {
+        "pagePath": "pages/readerAlterPwd/readerAlterPwd",
+        "text": "修改密码"
+      },
+      {
+        "pagePath": "pages/readerBorrowing/readerBorrowing",
+        "text": "在借图书"
+      },
+      {
+        "pagePath": "pages/readerBorrowed/readerBorrowed",
+        "text": "借阅记录"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

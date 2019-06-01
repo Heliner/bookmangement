@@ -1,0 +1,38 @@
+<!--pages/readerPersonal/readerPersonal.wxml-->
+<view class='contain'>
+   <view class='header'>
+        <view class='logo'>
+          <image src='/image/logo.png'  
+          style="height:120rpx;width:450rpx;float:left" mode='aspectFit'>    
+          </image>       
+        </view> 
+        <view class='text' >
+            <text  bindtap='goIndex' >首页</text>
+        </view>
+       
+    </view>
+   
+    <view class='Personinfo'>
+    <text>基本资料</text>
+     <view class='content'>
+     <view class='data'><label>借阅号</label><view >{{user.userId}}</view> 
+     </view>     
+     <view class='data'><label>用户名</label><view>{{user.userName}}</view> 
+     </view> 
+     <view class='data'><label>学院</label><view>{{user.departments}}</view>  
+     </view> 
+     <view class='data'><label>专业</label><view>{{user.major}}</view></view> 
+     <view class='data'><label>电话</label><view>{{user.phone}}</view></view> 
+     <view class='data'><label>邮箱</label><view>{{user.email}}</view></view> 
+     <view class='data'><label>借阅上限</label><view>{{user.max}}</view>     
+     </view> 
+     <view class='data'><label>借阅期限</label><view>{{user.time}}</view>
+     </view>
+     <view class='data'><label>已借数量</label><view>{{user.lendedNum}}  
+     </view></view>
+     </view>
+     
+  </view>
+  
+
+</view>

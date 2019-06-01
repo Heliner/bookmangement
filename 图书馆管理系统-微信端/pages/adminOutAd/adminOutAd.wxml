@@ -1,0 +1,40 @@
+<!--pages/adAddBook/adAddBook.wxml-->
+<view class='certain'>
+    <view class='logo'>
+      <image src='/image/logo.png'  
+      style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>    
+      </image>
+      <image class='booklogo' src='/image/booklogo.png'
+      style="height:150rpx; width:300rpx; float:left" mode='aspectFit'>        </image>
+    </view>
+       
+    <view class='content'>
+       
+       <view class='menu_left'>
+          <form bindsubmit='goOutAd'>
+            <view class='input'>
+             <view class='data'>
+                <label>管理员ID</label><input name='adid'></input>
+             </view>
+           </view>
+           <view class='Button'>
+             <view class='button'>
+               <button class="Btn" name="handup" type='primary'   
+               form-type='submit'  bindtap="Handup"
+                style='background-color: #419EDC'>确认删除</button> 
+             </view>
+             <view class='button'>
+               <button class="Btn" name="cancel" type='primary'   
+               form-type='reset'  bindtap="Cancel"
+                style='background-color: #419EDC'>取消</button> 
+             </view>
+           </view>
+         </form>
+       </view>
+    </view>
+
+
+
+
+
+</view>

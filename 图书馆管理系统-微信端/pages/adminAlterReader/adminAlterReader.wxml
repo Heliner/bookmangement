@@ -1,0 +1,72 @@
+<!--pages/adAlterBook/adAlterBook.wxml-->
+<!--pages/adOutBook/adOutBook.wxml-->
+<view class='certain'>
+  <view class='logo'>
+      <image src='/image/logo.png'  
+      style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>    
+      </image>
+      <image class='booklogo' src='/image/booklogo.png'
+      style="height:150rpx; width:300rpx; float:left" mode='aspectFit'>        </image>
+    </view>
+
+    <view class='content'>
+       <view class='form'>
+          <form bindsubmit='goAlterReader'>
+             <view class='input'>
+             <view class='data'>
+                <label>读者ID</label><input name='userId'
+                 placeholder='请输入借阅号' bindblur='getInput' 
+                 value='{{user.userId}}'></input>
+             </view>
+             <view class='data'>
+                <label>读者名</label><input value='{{user.userName}}' 
+                name='userName' disabled='{{inputflag}}'></input>
+             </view>
+             <view class='data'>
+                <label>学院</label><input value='{{user.departments}}'
+                name='departments' disabled='{{inputflag}}'></input>
+             </view>
+             <view class='data'>
+                <label>专业</label><input value='{{user.major}}'
+                name='major' disabled='{{inputflag}}'></input>
+             </view>
+             <view class='data'>
+                <label>电话</label><input value='{{user.phone}}' 
+                name='phone' disabled='{{inputflag}}'></input>
+             </view>
+             <view class='data'>
+                <label>邮箱</label><input value='{{user.email}}' 
+                name='email' disabled='{{flinputflag}}'></input>
+             </view>
+             <view class='data'>
+                <label>借阅上限</label><input value='{{user.max}}' 
+                name='max'   disabled='{{inputflag}}'></input>
+             </view>
+             <view class='data'>
+                <label>借阅期限</label><input value='{{user.time}}' name='time' 
+                disabled='{{inputflag}}'></input>
+             </view>
+            
+           </view>
+           
+           <view class='Button'>
+             <view class='button'>
+               <button class="Btn"  type='primary'   
+               form-type='submit'  
+                style='background-color: #419EDC'>确认修改</button> 
+             </view>
+             <view class='button'>
+               <button class="Btn" type='primary'   
+               form-type='reset'  
+                style='background-color: #419EDC'>取消</button> 
+             </view>
+           </view>
+          
+          </form>
+       
+       </view>
+    
+    </view>
+
+</view>
+

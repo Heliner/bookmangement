@@ -1,0 +1,21 @@
+<!--pages/Bookad/Bookad.wxml-->
+<view class='logo'>
+      <image src='/image/logo.png'  
+      style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>    
+      </image>
+</view>
+<view class='header'>
+    <text></text><text bindtap='exit'>退出</text>
+</view>
+
+<view class='content'>
+   <view class='con' bindtap='adminAddReader'><text>录入新读者</text></view>
+   <view class='con' bindtap='adminOutReader'><text>删除读者</text></view>
+   <view class='con' bindtap='adminAlterReader'><text>修改读者信息</text></view>
+   <view class='con' bindtap='adminAddAd'><text>录入图书管理员</text></view>
+   <view class='con' bindtap='adminOutAd'><text>删除图书管理员</text></view>
+   <view class='con' bindtap='adminAlterAd'><text>修改图书管理员信息</text></view>
+   <view class='con' bindtap='adminSearchReader'><text>查看读者信息</text></view>
+   <view class='con' bindtap='adminSearchAd'><text>查看管理员信息</text></view>
+   <view class='con' bindtap='adminPersonal'><text>管理员中心</text></view>    
+</view>

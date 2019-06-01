@@ -1,0 +1,80 @@
+/* pages/readerPersonal/readerPersonal.wxss */
+.content{
+	width: 90%;
+  height: 1100rpx;
+  border:5px solid #419EDC;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 15px;
+	padding:40px 0px;
+}
+
+
+
+.header{
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.logo{
+  float: left;
+  width: 225p;
+  height: 60px;
+ 
+}
+
+.text{
+ float: left;
+ width:300rpx;
+ height:50rpx;
+ text-align: center;
+ margin-top:30rpx; 
+ 
+}
+
+.text text{
+  color: #B2DFEE;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.Personinfo{
+  text-align: center;
+}
+.Personinfo text{
+  margin-top:50px;
+  color: #419EDC;
+}
+.data{
+ 		width: 100%;
+     height: 60px;
+     line-height: 35px;
+     margin-bottom: 5px;
+ 		}
+	 		.data label{
+	              font-size: 14px; 
+                float: left;
+                margin-left: 10%;
+                color: #515567;
+                font-weight: bold;
+	 		}
+	 		.data view{
+	             width: 250rpx;
+               line-height: 50rpx;
+                float: right;
+                margin-right: 100rpx;
+                font-size: 20rpx;
+                border-radius: 5rpx;
+                padding: 6rpx 12rpx;
+                background-color: #E0EDF5;
+	 	           	}

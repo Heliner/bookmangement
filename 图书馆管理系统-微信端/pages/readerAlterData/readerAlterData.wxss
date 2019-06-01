@@ -1,0 +1,80 @@
+/* pages/readerAlterData/readerAlterData.wxss */
+.logo{
+  height:200rpx; 
+}
+
+.content{
+	width: 90%;
+  border:5px solid #419EDC;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 15px;
+
+}
+
+.header{
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.logo{
+  float: left;
+  width: 225p;
+  height: 60px;
+ 
+}
+
+.text{
+ float: left;
+ width:300rpx;
+ height:50rpx;
+ text-align: center;
+ margin-top:30rpx; 
+ 
+}
+
+.text text{
+  color: #B2DFEE;
+}
+
+
+
+
+.input{
+  height: 300rpx;
+}
+
+.data{
+ 			width: 100%;
+       height: 45px;
+       line-height: 35px;
+       margin-bottom: 5px;
+ 		}
+	 		.data label{
+	              font-size:18px; 
+                float: left;
+                margin-left: 10%;
+                 margin-top:20rpx;
+                color: #515567;
+                font-weight: bold;
+	 		}
+	 		.data input{
+	             width: 350rpx;
+               height: 20px;
+               border: 1px solid #ccc; 
+               float: right;
+               margin-right: 100rpx;
+               margin-top:20rpx;
+               font-size: 20px;
+               border-radius: 5px;
+               padding: 6px 12px;
+	 		}
+
+.button{
+  height: 200rpx;
+
+}
+.alterBtn{
+   width: 150rpx;
+}

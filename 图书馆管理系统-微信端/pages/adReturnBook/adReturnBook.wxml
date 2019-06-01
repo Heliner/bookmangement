@@ -1,0 +1,33 @@
+<!--pages/adReturnBook/adReturnBook.wxml-->
+
+<view class='certain'>
+  <view class='logo'>
+    <image src='/image/logo.png' style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>
+    </image>
+    <image class='booklogo' src='/image/booklogo.png' style="height:150rpx; width:300rpx; float:left" mode='aspectFit'> </image>
+  </view>
+
+  <view class='content'>
+    <view class='form'>
+      <form bindsubmit='goReturnBook'>
+        <view class='data'>
+          <label>图书编号</label>
+          <input type='text' name='bookId'>
+          </input>
+          <label>借阅号</label>
+          <input type='text' name='userId'>
+          </input>
+        </view>
+
+        <view class='Button'>
+          <button class="Btn" type='primary' form-type='submit' style='background-color: #419EDC'>确认归还</button>
+        </view>
+      </form>
+
+    </view>
+
+  </view>
+
+
+
+</view>

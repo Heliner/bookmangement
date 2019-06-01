@@ -1,0 +1,78 @@
+<!--pages/adAddBook/adAddBook.wxml-->
+<view class='certain'>
+    <view class='logo'>
+      <image src='/image/logo.png'  
+      style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>    
+      </image>
+      <image class='booklogo' src='/image/booklogo.png'
+      style="height:150rpx; width:300rpx; float:left" mode='aspectFit'>        </image>
+    </view>
+       
+    <view class='content'>
+       
+       <view class='menu_left'>
+          <form bindsubmit='goAddReader'>
+            <view class='input'>
+             
+             <view class='data'>
+                <label>用户名</label><input name='userName'></input>
+             </view >
+             <view class='data'>
+                <label>学院</label><input name='departments'></input>
+             </view>
+             <view class='data'>
+                <label>专业</label><input name='major'></input>
+             </view>
+            
+             <view class='data'>
+                <label>电话</label><input name='phone'></input>
+             </view>
+             <view class='data'>
+                <label>邮箱</label><input name='email'></input>
+             </view>
+             <view class='data'>
+                <label>借阅上限</label>
+                <radio-group name="max">
+                  <label>
+                    <radio value="10"></radio>10天
+                  </label>
+                  <label>
+                    <radio value="15"></radio>15天
+                  </label>
+                </radio-group>
+             </view>
+             <view class='data'>
+                <label>借阅期限</label>
+                <radio-group name="time">
+                  <label>
+                    <radio value="30"></radio>30天
+                  </label>
+                  <label>
+                    <radio value="90"></radio>90天
+                  </label>
+                </radio-group>
+             </view>
+           </view>
+           <view class='Button'>
+             <view class='button'>
+               <button class="Btn"  type='primary'   
+               form-type='submit'  
+                style='background-color: #419EDC'>确认添加</button> 
+             </view>
+             <view class='button'>
+               <button class="Btn"  type='primary'   
+               form-type='reset' 
+                style='background-color: #419EDC'>取消</button> 
+             </view>
+           </view>
+         </form>
+       
+       </view>
+
+    </view>
+
+
+
+
+
+</view>

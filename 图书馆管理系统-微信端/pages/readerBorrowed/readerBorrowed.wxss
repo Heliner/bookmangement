@@ -1,0 +1,81 @@
+/* pages/readerBorrowed/readerBorrowed.wxss */
+/* pages/readerBorrowing/readerBorrowing.wxss */
+
+
+.content{
+	width: 90%;
+  height:100%;
+  border:5px solid #419EDC;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 15px;
+}
+
+.header{
+  width: 100%;
+  height: 60px;
+  background-color: white;
+}
+
+.logo{
+  float: left;
+  width: 225p;
+  height: 60px;
+ 
+}
+
+.text{
+ float: left;
+ width:300rpx;
+ height:50rpx;
+ text-align: center;
+ margin-top:30rpx; 
+ 
+}
+
+.text text{
+  color: #B2DFEE;
+}
+
+
+
+
+.table{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+   border-top: 1rpx solid #419EDC;
+   border-left: 1rpx solid #419EDC;
+}
+
+.tr{
+  
+  display: flex;
+  flex-direction: row;
+}
+.thead .td{
+  text-align: center;
+  font-weight: bold;
+  align-content: center;
+}
+
+.td{
+ text-align: center;
+  border-right: 1rpx solid #419EDC;
+  border-bottom: 1rpx solid #419EDC;
+}
+.tr .td:first-child{
+  flex: 1;
+}
+.tr .td:nth-child(2){
+  flex: 1;
+}
+.tr .td:nth-child(3){
+  flex: 3;
+}
+.tr .td:nth-child(4){
+  flex: 2.5;
+}
+.tr .td:nth-child(5){
+  flex: 2.5;
+}

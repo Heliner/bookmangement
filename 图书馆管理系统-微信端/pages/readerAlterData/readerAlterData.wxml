@@ -1,0 +1,37 @@
+<!--pages/readerAlterData/readerAlterData.wxml-->
+<view class='contain'>
+    <view class='header'>
+        <view class='logo'>
+          <image src='/image/logo.png'  
+          style="height:120rpx;width:450rpx;float:left" mode='aspectFit'>    
+          </image>       
+        </view> 
+        <view class='text' >
+            <text  bindtap='goIndex' >首页</text>
+        </view>
+       
+    </view>
+    
+    
+    <view class='content'>
+      <form bindsubmit='goAlter'>
+          <view class='input'>
+            <view class='data' >
+              <label>电话</label><input name="phone" type='text' 
+               value='{{user.phone}}'></input>
+              <label>邮箱</label><input name="email" type='text' 
+               value='{{user.email}}'></input>
+            </view>
+          </view>
+          
+          <view class='button'>
+            <button class="alterBtn" name="alter" type='primary'   
+               form-type='submit' style='background-color: #419EDC'>提交</button> 
+          </view>
+          
+      </form>
+    </view>
+ 
+    
+  
+</view>

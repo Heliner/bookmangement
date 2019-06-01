@@ -1,0 +1,52 @@
+<!--pages/adCheckBook/adCheckBook.wxml-->
+<view class='certain'>
+  <view class='logo'>
+    <image src='/image/logo.png' style="height:100rpx;width:450rpx;float:left" mode='aspectFit'>
+    </image>
+    <image class='booklogo' src='/image/booklogo.png' style="height:150rpx; width:300rpx; float:left" mode='aspectFit'> </image>
+  </view>
+
+  <view class='content'>
+    <view class='form'>
+      <form bindsubmit='search'>
+        <view class='input'>
+          <input class='search' type='text' name='content' placeholder='请输入图书名称/编号/作者'></input>
+        </view>
+        <view class='Btn'>
+          <button class="loginBtn" name="reset" type='primary' form-type='submit' style=' background-color: #B2DFEE; height:88rpx'>搜索</button>
+        </view>
+        <view class='data'>
+          <button type='primary' form-type='submit' bindtap='dec' style='background-color: #B2DFEE; height:88rpx'>上一页</button>
+          <input class='search' type='text' name='currentPage' value="{{currentPage}}" placeholder='1'></input>
+          <button type='primary' form-type='submit' bindtap='inc' style=' background-color: #B2DFEE; height:88rpx'>下一页</button>
+        </view>
+      </form>
+    </view>
+
+    <view class='table'>
+      <view class='tr thead'>
+        <view class='td'>图书编号</view>
+        <view class='td'>图书名称</view>
+        <view class='td'>作者</view>
+        <view class='td'>借阅者编号</view>
+        <view class='td'>价格</view>
+        <view class='td'>ISBN编码</view>
+        <view class='td'>借出</view>
+      </view>
+      <view class='tr' wx:for='{{tableData}}'>
+        <view class='td'>{{item.book_id}}</view>
+        <view class='td'>{{item.book_name}}</view>
+        <view class='td'>{{item.author}}</view>
+        <view class='td'>{{item.user_id}}</view>
+        <view class='td'>{{item.price}}</view>
+        <view class='td'>{{item.isbn_code}}</view>
+        <view class='td'>{{item.state==0?"是":"否"}}</view>
+      </view>
+    </view>
+
+
+  </view>
+
+
+
+</view>
