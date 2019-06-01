@@ -41,12 +41,9 @@ public class BookAdminService {
         return bookAdminMapper.selectByPrimaryKey(bookAdmin.getAdid());
     }
 
-    public void updateOther(BookAdmin bookAdmin) {
-        bookAdminMapper.updateByPrimaryKey(bookAdmin);
-    }
 
     public void insert(BookAdmin bookAdmin) {
-        bookAdminMapper.insert(bookAdmin);
+        bookAdminMapper.insertSelective(bookAdmin);
     }
 
     public void delete(BookAdmin bookAdmin) {
@@ -54,25 +51,31 @@ public class BookAdminService {
     }
 
     public void update(BookAdmin bookAdmin) {
-        bookAdminMapper.updateByPrimaryKey(bookAdmin);
+        bookAdminMapper.updateByPrimaryKeySelective(bookAdmin);
     }
 
     public void update(BookAdminCenterDTO bookAdminCenterDTO, HttpServletRequest request) {
-        if (!bookAdminCenterDTO.getAdcpassword().equals(bookAdminCenterDTO.getAdnPassword()))
-            throw new NullOrEmptyException("两次密码不一样");
+        if (!StringUtils.isBlank(bookAdminCenterDTO.getAdpassword()))
+            if (!bookAdminCenterDTO.getAdcpassword().equals(bookAdminCenterDTO.getAdnpassword()))
+                throw new NullOrEmptyException("两次密码不一样");
         String pk = ((BookAdmin) (request.getSession().getAttribute("user"))).getAdid();
         BookAdmin adminFromDB = bookAdminMapper.selectByPrimaryKey(pk);
-        if (!bookAdminCenterDTO.getAdpassword().equals(adminFromDB.getAdpassword()))
-            throw new NullOrEmptyException("密码不正确");
+        if (!StringUtils.isBlank(bookAdminCenterDTO.getAdpassword()))
+            if (!bookAdminCenterDTO.getAdpassword().equals(adminFromDB.getAdpassword()))
+                throw new NullOrEmptyException("密码不正确");
 
         BookAdmin bookAdmin = new BookAdmin();
+        bookAdmin.setAdid(pk);
         BeanUtils.copyProperties(bookAdminCenterDTO, bookAdmin);
-        bookAdminMapper.updateByPrimaryKey(bookAdmin);
+        bookAdmin.setAdpassword(bookAdminCenterDTO.getAdcpassword());
+
+        bookAdminMapper.updateByPrimaryKeySelective(bookAdmin);
+        request.getSession().setAttribute("user", bookAdminMapper.selectByPrimaryKey(pk));
     }
 
 
     public BookAdmin getBookAdmin(HttpServletRequest request) {
-        return (BookAdmin)request.getAttribute("user");
+        return (BookAdmin) request.getSession().getAttribute("user");
     }
 
     public BookAdmin selectAdminByPK(String userId) {

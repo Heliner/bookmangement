@@ -108,17 +108,17 @@
                 </el-form-item>
                 <el-form-item label="初始密码">
                     <el-col :span="8">
-                        <el-input :disabled="ban"  v-model="bookAdmin.adpassword"/>
+                        <el-input :disabled="ban" v-model="bookAdmin.adpassword"/>
                     </el-col>
                 </el-form-item>
                 <el-form-item label="电话">
                     <el-col :span="8">
-                        <el-input :disabled="ban"  v-model="bookAdmin.adphone"/>
+                        <el-input :disabled="ban" v-model="bookAdmin.adphone"/>
                     </el-col>
                 </el-form-item>
                 <el-form-item label="邮箱">
                     <el-col :span="8">
-                        <el-input :disabled="ban"  v-model="bookAdmin.ademail"/>
+                        <el-input :disabled="ban" v-model="bookAdmin.ademail"/>
                     </el-col>
                 </el-form-item>
 
@@ -158,7 +158,7 @@
                 var _this = this;
                 axios.post("/sysAdmin/oneBookAdmin", _this.bookAdmin).then(function (value) {
                     var s_data = value.data;
-                    if (! _this.parseInfo(value)) return;
+                    if (!_this.parseInfo(value)) return;
                     // _this.parseInfo(value);
 
                     var has = s_data.data;
@@ -174,7 +174,8 @@
             }, delete_submit: function () {
                 var _this = this;
                 axios.post("/sysAdmin/deleteBookAdmin", _this.bookAdmin).then(function (value) {
-                    parseInfo(value)
+                    _this.parseInfo(value);
+                    _this.$message("删除完成");
                 }).catch(function (error) {
                     _this.$message('出现错误:' + error);
                 });

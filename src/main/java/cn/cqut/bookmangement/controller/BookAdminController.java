@@ -94,7 +94,7 @@ public class BookAdminController {
     @RequestMapping("/getBookAdmin")
     public AjaxResult A12(HttpServletRequest request) {
         BookAdmin bookAdmin = bookAdminService.getBookAdmin(request);
-        bookAdmin.setAdpassword("");
+        bookAdmin.setAdpassword(null);
         return GENERATE_SUCCESS_RESULT(bookAdmin);
     }
 }

@@ -62,7 +62,7 @@
         FROM borrowrecords
         WHERE borrowrecords.user_id = #{userId}
           and borrowrecords.book_id = #{bookId}
-        ORDER BY borrow_id
+        ORDER BY borrow_id DESC
         LIMIT 1
     </select>
     <update id="update">
@@ -81,7 +81,7 @@
                bookinfo.book_name
         FROM borrowrecords INNER JOIN bookinfo
         ON borrowrecords.book_id = bookinfo.book_id
-        WHERE state = 0
+        WHERE ISNULL(return_time)
             and user_id = #{userId}
     </select>
     <select id="selectUnRecByUserOnRec" parameterType="string" resultType="map">

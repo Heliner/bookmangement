@@ -33,7 +33,7 @@ public class UserController {
     @ResponseBody
     public AjaxResult A02(@RequestBody User user, HttpServletRequest request) {
         userService.update(user, request);
-        return GENERATE_SUCCESS_MESSAGE("更新成功");
+        return GENERATE_SUCCESS_RESULT("更新成功");
     }
 
     @RequestMapping("/bookReced")

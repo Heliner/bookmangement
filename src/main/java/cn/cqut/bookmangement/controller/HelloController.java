@@ -1,20 +1,25 @@
 package cn.cqut.bookmangement.controller;
 
 import cn.cqut.bookmangement.entity.Hello;
+import cn.cqut.bookmangement.service.UserService;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 public class HelloController {
     //for brow
 //    @RequestMapping("/world")
+
     public ModelAndView hello(ModelAndView modelAndView) {
         modelAndView.setViewName("/helloworld");
         modelAndView.addObject("cont", "你好！世界");
@@ -46,7 +51,7 @@ public class HelloController {
 
     @RequestMapping("/valid")
     @ResponseBody
-    public String valid(@Valid @RequestBody Hello hello) {
-        return "ok";
+    public String valid() {
+        throw new NullPointerException("a");
     }
 }

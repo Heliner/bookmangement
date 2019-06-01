@@ -77,6 +77,9 @@
                 #{adphone,jdbcType=VARCHAR}, #{ademail,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="cn.cqut.bookmangement.entity.BookAdmin">
+        <selectKey keyProperty="adid" order="BEFORE" resultType="java.lang.String">
+            SELECT uuid()
+        </selectKey>
         insert into bookadmin
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="adid != null">

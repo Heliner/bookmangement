@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style/adminReader.css}">
     <script type="text/javascript" th:src="@{/script/jquery-2.1.4.min.js}"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/vue/dist/vue.js" th:src="@{/script/vue.js}"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js" th:src="@{/script/ElementUI.js}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" th:src="@{/script/axios.min.js}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $(".left ul li:eq(8)").css("color", "#FFF");
@@ -86,42 +92,94 @@
         </div>
         <div class="right">
             <!-- class="ad_data"的div中是系统管理员系统的切换部分 -->
-            <div class="ad_data">
-                <form id="form" action="/bookAdmin/center" method="post">
-                    <input class="inputBtn" style="width:100px;height:34px;margin:0px 0px 20px 150px;font-size:16px"
-                           type="button" value="修改资料"/>
-                    <div class="data"><label>原密码</label><input type="password" name="adpassword"/></div>
-                    <div class="data"><label>新密码</label><input type="password" name="adnPassword"/></div>
-                    <div class="data"><label>确认新密码</label><input type="password" name="adcpassword"/></div>
-                    <div class="data"><label>电话</label><input value="18823456543" name="adphone"/></div>
-                    <div class="data"><label>邮箱</label><input type="email" value="18823456@qq.com" name="ademail"/>
-                    </div>
-                    <button class="add_btn" id="add_btn">提交修改</button>
-                    <div class="noadd_btn">取消</div>
-                </form>
-            </div>
+            <el-form id="app" label-width="80px">
+                <el-form-item>
+                    <el-button @click="unban_input">修改资料</el-button>
+                </el-form-item>
+                <el-form-item label="原密码">
+                    <el-col :span="8">
+                        <el-input :disabled="ban" v-model="sysAdmin.adminpassword"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="新密码">
+                    <el-col :span="8">
+                        <el-input :disabled="ban" v-model="sysAdmin.admincPassword"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="确认新密码">
+                    <el-col :span="8">
+                        <el-input :disabled="ban" v-model="sysAdmin.adminnPassword"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="电话">
+                    <el-col :span="8">
+                        <el-input :disabled="ban" v-model="sysAdmin.adminphone"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item label="邮箱">
+                    <el-col :span="8">
+                        <el-input :disabled="ban" v-model="sysAdmin.adminemail"/>
+                    </el-col>
+                </el-form-item>
+                <el-form-item>
+                    <el-button-group>
+                        <el-button type="info" @click="update_submit">修改</el-button>
+                        <el-button type="info" @click="cancle_submit">取消</el-button>
+                    </el-button-group>
+                </el-form-item>
+            </el-form>
+
         </div>
         <div class="clear"></div>
     </div>
 </div>
 </body>
 <script>
-    $('#add_btn').click(function () {
-        console.log($("#form").serialize());
-        $.ajax({
-            type: 'post',
-            data: $('#form').serialize(),
-            url: "/bookAdmin/updateSysAdmin",
-            cache: false,
-            dataType: 'json',
-            success: function (data) {
-                alert("修改成功");
-            },
-            error: function (data) {
-                alert("生成失败，原因：" + data.data.message);
+    new Vue({
+        el: '#app',
+        data: {
+            ban: true,
+            sysAdmin: {
+                adminnPassword: '',
+                admincPassword: '',
+                adminpassword: '',
+                adminphone: '',
+                adminemail: ''
             }
-        });
-    })
+        },
+        created: function () {
+            var _this = this;
+            axios.post("/sysAdmin/getSysAdmin").then(function (value) {
+                if (_this.parseInfo(value))
+                    _this.sysAdmin = value.data.data;
+                _this.sysAdmin.adminpassword=''
+            }).catch(function (error) {
+                _this.$message('出现错误:' + error);
+            });
+        }, methods: {
+            unban_input: function () {
+                this.ban = false;
+            },
+            out: function () {
+            },
+            update_submit: function () {
+                var _this = this;
+                axios.post("/sysAdmin/updateSysAdmin", _this.sysAdmin).then(function (value) {
+                    if (_this.parseInfo(value)) _this.$message("修改完成");
+                }).catch(function (error) {
+                    _this.$message('出现错误:' + error);
+                });
+            }, cancle_submit: function () {
+                this.ban = true;
+            }, parseInfo: function (value) {
+                var code = value.data.resultCode;
+                if (code == 0)
+                    return true;
+                this.$message("请求失败，原因：" + value.data.message);
+                return false;
+            }
 
+        }
+    })
 </script>
 </html>

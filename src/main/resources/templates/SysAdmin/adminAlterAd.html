@@ -174,7 +174,7 @@
                 });
             }, update_submit: function () {
                 var _this = this;
-                axios.post("/sysAdmin/updateSysAdmin", _this.bookAdmin).then(function (value) {
+                axios.post("/sysAdmin/updateBookAdmin", _this.bookAdmin).then(function (value) {
                     _this.$message("修改提交完成");
                     _this.parseInfo(value)
                 }).catch(function (error) {

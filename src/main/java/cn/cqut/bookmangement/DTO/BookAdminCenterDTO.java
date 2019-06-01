@@ -4,9 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 public class BookAdminCenterDTO {
     private String adpassword;
 
@@ -14,7 +11,7 @@ public class BookAdminCenterDTO {
 
     private String ademail;
 
-    private String adnPassword;
+    private String adnpassword;
 
     private String adcpassword;
 
@@ -42,12 +39,12 @@ public class BookAdminCenterDTO {
         this.ademail = ademail;
     }
 
-    public String getAdnPassword() {
-        return adnPassword;
+    public String getAdnpassword() {
+        return adnpassword;
     }
 
-    public void setAdnPassword(String adnPassword) {
-        this.adnPassword = adnPassword;
+    public void setAdnpassword(String adnpassword) {
+        this.adnpassword = adnpassword;
     }
 
     public String getAdcpassword() {

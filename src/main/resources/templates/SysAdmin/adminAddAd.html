@@ -157,7 +157,7 @@
             parseInfo: function (value) {
                 var code = value.data.resultCode;
                 if (code == 0) {
-                    _this.$message("插入成功");
+                    this.$message("插入成功");
                     return true;
                 }
                 this.$message("请求失败，原因：" + value.data.message);

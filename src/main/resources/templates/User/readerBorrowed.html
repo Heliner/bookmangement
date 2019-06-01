@@ -79,22 +79,22 @@
                             label="序号">
                     </el-table-column>
                     <el-table-column
-                            prop="userId"
+                            prop="user_id"
                             label="借阅号"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="bookName"
+                            prop="book_name"
                             label="图书名"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="shouldTime"
+                            prop="should_time"
                             label="应还日期"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="returnTime"
+                            prop="return_time"
                             label="还书日期"
                             width="180">
                     </el-table-column>
@@ -117,7 +117,8 @@
         created: function () {
             var _this = this;
             axios.post("/user/bookUnReced").then(function (value) {
-                _this.borrowingRec = value.data.data.data;
+                console.log(value)
+                _this.borrowingRec = value.data.data;
             }).catch(function (error) {
                 _this.$message('出现错误:' + error);
             });

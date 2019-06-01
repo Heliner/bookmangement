@@ -1,17 +1,16 @@
 package cn.cqut.bookmangement.config;
 
 import cn.cqut.bookmangement.interceptor.MyInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 
 @Configuration
 public class MyConfig extends WebMvcConfigurerAdapter {
-
+    @Autowired
+    MyInterceptor myInterceptor;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
@@ -69,18 +68,12 @@ public class MyConfig extends WebMvcConfigurerAdapter {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-
         //这里参数是一个实现了HandlerInterceptor接口的拦截器
-        registry.addInterceptor(reThis())
+//        System.out.println(myInterceptor);
+        registry.addInterceptor(myInterceptor)
                 .addPathPatterns("/sysAdmin/**")//需要拦截的请求
                 .addPathPatterns("/bookAdmin/**")
                 .addPathPatterns("/user/**")
                 .excludePathPatterns("/*");
-
-    }
-
-    //    @Bean
-    public MyInterceptor reThis() {
-        return new MyInterceptor();
     }
 }

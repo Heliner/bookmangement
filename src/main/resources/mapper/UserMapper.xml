@@ -84,6 +84,9 @@
                 #{phone,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{departments,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="cn.cqut.bookmangement.entity.User">
+        <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
+            SELECT uuid()
+        </selectKey>
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">

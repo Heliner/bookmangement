@@ -28,8 +28,7 @@ public class SearchController {
 
     @RequestMapping("/login")
     public AjaxResult A02(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) {
-        userService.login(userLoginDTO, request);
-        return GENERATE_SUCCESS_RESULT();
+        return GENERATE_SUCCESS_RESULT(userService.login(userLoginDTO, request));
     }
 
     @RequestMapping("/loginOut")

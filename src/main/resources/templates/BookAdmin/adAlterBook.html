@@ -176,8 +176,8 @@
                 });
             }, delete_submit: function () {
                 var _this = this;
-                axios.post("/bookAdmin/deleteBook", _this.updateBook).then(function (value) {
-                    parseInfo(value)
+                axios.post("/bookAdmin/updateBook", _this.book).then(function (value) {
+                    _this.parseInfo(value)
                 }).catch(function (error) {
                     _this.$message('出现错误:' + error);
                 });

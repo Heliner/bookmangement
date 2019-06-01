@@ -36,7 +36,7 @@
         <div class="home_logo"><a href="/index.html"><i class="fa fa-home">首页</i></a></div>
         <div class="page_title">个人中心</div>
 
-        <div class="out_page" ><a href="/loginOut">退出</a></div>
+        <div class="out_page"><a href="/loginOut">退出</a></div>
     </div>
 </div>
 <div class="book_logo">
@@ -66,13 +66,13 @@
 </div>
 
 <!-- class="content"的div中是个人中心的切换部分 -->
-<div class="content">
+<div class="content" id="app">
     <div class="book_num">
         <div class="borred">已借: <span>4</span>本</div>
         <div class="borred">剩余可借: <span>6</span>本</div>
     </div>
     <div class="table_div">
-        <el-form id="app">
+        <el-form >
             <el-form-item>
                 <el-table stripe
                           :data="borrowingRec"
@@ -83,17 +83,17 @@
                             label="序号">
                     </el-table-column>
                     <el-table-column
-                            prop="userId"
+                            prop="user_id"
                             label="借阅号"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="bookName"
+                            prop="book_name"
                             label="图书名"
                             width="180">
                     </el-table-column>
                     <el-table-column
-                            prop="shouldTime"
+                            prop="should_time"
                             label="应还日期"
                             width="180">
                     </el-table-column>
@@ -111,12 +111,19 @@
     new Vue({
         el: '#app',
         data: {
+            user: {},
             borrowingRec: []
         },
         created: function () {
             var _this = this;
             axios.post("/user/bookReced").then(function (value) {
-                _this.borrowingRec = value.data.data.data;
+                _this.borrowingRec = value.data.data;
+            }).catch(function (error) {
+                _this.$message('出现错误:' + error);
+            });
+            axios.post("/user/getUser").then(function (value) {
+                _this.user = value.data.data;
+
             }).catch(function (error) {
                 _this.$message('出现错误:' + error);
             });

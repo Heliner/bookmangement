@@ -36,7 +36,8 @@ public class SysAdminController {
 
     @RequestMapping("/oneUser")
     public AjaxResult A02(@RequestBody User user) {
-        return GENERATE_SUCCESS_RESULT(userService.getOneByPk(user));
+        user =userService.getOneByPk(user);
+        return GENERATE_SUCCESS_RESULT(user);
     }
 
     @RequestMapping("/updateUser")
@@ -86,5 +87,15 @@ public class SysAdminController {
     @RequestMapping("/searchUsers")
     public AjaxResult A11(@RequestBody SearchContent searchContent) {
         return GENERATE_SUCCESS_RESULT(userService.selectPage(searchContent));
+    }
+
+    @RequestMapping("/getSysAdmin")
+    public AjaxResult A12(HttpServletRequest request) {
+        return GENERATE_SUCCESS_RESULT(userService.getSysAdmin(request));
+    }
+    @RequestMapping("/updateBookAdmin")
+    public AjaxResult A13(@RequestBody BookAdmin bookAdmin) {
+        bookAdminService.update(bookAdmin);
+        return GENERATE_SUCCESS_RESULT();
     }
 }

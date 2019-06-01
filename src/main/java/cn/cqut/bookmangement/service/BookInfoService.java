@@ -75,7 +75,6 @@ public class BookInfoService {
         //1、修改书籍状态
         //2、更新借阅记录
         //3、修改借书人信息
-
         User user = new User();
         BeanUtils.copyProperties(borrowRecord, user);
         user = userService.selectPK(user.getUserId());
@@ -85,7 +84,7 @@ public class BookInfoService {
         bookInfoMapper.updateStateToUnReced(borrowRecord.getBookId());
 
         borrowRecord = borrowRecordService.selectOneRecByUserAndBookId(borrowRecord);
-        if (borrowRecord.getReturnTime() != null)
+        if (borrowRecord==null||borrowRecord.getReturnTime() != null)
             throw new NullOrEmptyException("图书已归还");
 
         borrowRecord.setReturnTime(new java.util.Date(System.currentTimeMillis()));
@@ -118,7 +117,7 @@ public class BookInfoService {
     }
 
     public void update(BookInfo bookInfo) {
-        bookInfoMapper.updateByPrimaryKey(bookInfo);
+        bookInfoMapper.updateByPrimaryKeySelective(bookInfo);
     }
 
     public BookInfoExample selectBookPage(SearchContent searchContent) {

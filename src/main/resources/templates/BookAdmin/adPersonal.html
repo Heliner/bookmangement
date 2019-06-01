@@ -121,8 +121,6 @@
                         </el-button-group>
                     </el-form-item>
                 </el-form>
-                <div class="add_btn">提交修改</div>
-                <div class="noadd_btn">取消</div>
             </div>
         </div>
         <div class="clear"></div>
@@ -145,8 +143,7 @@
         created: function () {
             var _this = this;
             axios.post("/bookAdmin/getBookAdmin").then(function (value) {
-                _this.bookAdmin = value.data.data;
-                // parseInfo(value);
+                if (_this.parseInfo(value)) _this.bookAdmin = value.data.data;
             }).catch(function (error) {
                 _this.$message('出现错误:' + error);
             });
@@ -158,7 +155,7 @@
             submit: function () {
                 var _this = this;
                 axios.post("/bookAdmin/updateBookAdmin", _this.bookAdmin).then(function (value) {
-                    parseInfo(value);
+                    _this.parseInfo(value);
                 }).catch(function (error) {
                     _this.$message('出现错误:' + error);
                 });

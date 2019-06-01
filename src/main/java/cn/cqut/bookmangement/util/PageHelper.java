@@ -14,7 +14,7 @@ public abstract class PageHelper<T> {
     private Integer nextPage;
     private Integer totalPage;            //总页数 末页
     private Integer count;                //总条数
-    private Integer pageSize = 2;        //每页多少条
+    private Integer pageSize = 6;        //每页多少条
     private Integer start = 0;
 
     public Integer getStart() {
@@ -102,11 +102,12 @@ public abstract class PageHelper<T> {
             pageHelper.setPageSize(10);
         pageHelper.setTotalPage(pageHelper.getTotalPage());
 
+        if (pageHelper.getCurrentPage() == null || pageHelper.getCurrentPage() <= 0)
+            pageHelper.setCurrentPage(1);
         if (pageHelper.currentPage > pageHelper.totalPage)
             pageHelper.setCurrentPage(pageHelper.totalPage);
         if (pageHelper.getCurrentPage() == null || pageHelper.getCurrentPage() <= 0)
             pageHelper.setCurrentPage(1);
-
         return pageHelper;
 
     }

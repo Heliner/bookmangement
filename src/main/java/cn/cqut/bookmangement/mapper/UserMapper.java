@@ -23,6 +23,7 @@ public interface UserMapper {
 
     int updateByPrimaryKeySelective(User record);
 
+    @Deprecated
     int updateByPrimaryKey(User record);
 
     int countForSearch(@Param("content") String content);

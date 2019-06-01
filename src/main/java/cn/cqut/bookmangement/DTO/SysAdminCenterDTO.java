@@ -12,9 +12,9 @@ public class SysAdminCenterDTO {
 
     private String adminpassword;
 
-    private String adminnpassword;
+    private String adminnPassword;
 
-    private String admincpassword;
+    private String admincPassword;
 
     private String adminphone;
 
