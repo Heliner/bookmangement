@@ -111,10 +111,13 @@ CREATE TABLE `bookadmin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-# 特殊说明
+## 特殊说明
 
 `HELP.md`中为服务端与客户端的通信协议
 
 项目暂时还未部署演示地址，后面可能会考虑加入
 
 微信前端的代码使用过上一届的学长获得。
+
+## 技术总结
+技术总结放在了个人小站上,http://heliner.tk/2019/06/02/web%E8%AF%BE%E7%A8%8B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/
