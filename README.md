@@ -1,6 +1,5 @@
 # 图书管理系统（bookmangement）
 CQUT专业实习 微信+Web：图书管理系统；欢迎下载,提交错误报告
-![AppVeyor](https://img.shields.io/appveyor/ci/Heliner/bookmangement.svg)
 # 实现技术
 
 ## 后台
